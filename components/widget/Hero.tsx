@@ -2,7 +2,7 @@ import React from 'react'
 
 const Hero = () => {
   return (
-    <header>
+    <header className='pt-4'>
         Hero
     </header>
   )
