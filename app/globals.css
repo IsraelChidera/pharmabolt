@@ -18,6 +18,7 @@ body {
   /* font-family: ; */
 }
 
-a:active {
-  color: #008BFF;
+.hero-image {
+  width: 659px;
+  height: 553px;
 }
