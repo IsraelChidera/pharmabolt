@@ -1,9 +1,9 @@
 'use client'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-const NavigationItem = ({ href, children, ...rest }) => {
+const NavigationItem = ({ href, children, ...rest }: { href: string, children: React.ReactNode }) => {
     const currentRoute = usePathname();
     const [isActive, setIsActive] = useState(false);
     useEffect(() => {
@@ -11,7 +11,7 @@ const NavigationItem = ({ href, children, ...rest }) => {
     }, [currentRoute, href])
 
     return (
-        <li>        
+        <li>
             <Link {...rest} href={href} className={isActive ? `text-primary relative` : ``}>
                 {children}
             </Link>
