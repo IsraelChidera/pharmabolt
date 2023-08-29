@@ -14,11 +14,18 @@ body {
 }
 
 .text-primary {
-  color: #008BFF;
+  color: #008bff;
   /* font-family: ; */
 }
 
 .hero-image {
   width: 659px;
   height: 553px;
+}
+
+.rectangle {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 5px 50px #0000000d;
+  padding: 2rem 4rem 2rem 1.5rem;
 }
