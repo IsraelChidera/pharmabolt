@@ -11,7 +11,8 @@ import product6 from '../../public/assets/product6.png';
 import product7 from '../../public/assets/product7.png';
 import product8 from '../../public/assets/product8.png';
 
-import { CustomButton } from '..';
+import { CustomButton, SecondaryButton } from '..';
+
 
 const Products = () => {
 
@@ -55,7 +56,7 @@ const Products = () => {
                 </div>
 
                 <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>                        
+                    <div className='rectangle2 bg-white relative'>
                         <Image src={product3} alt="product" />
                     </div>
 
@@ -66,7 +67,7 @@ const Products = () => {
                 </div>
 
                 <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>                        
+                    <div className='rectangle2 bg-white relative'>
                         <Image src={product4} alt="product" />
                     </div>
 
@@ -77,7 +78,7 @@ const Products = () => {
                 </div>
 
                 <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>                        
+                    <div className='rectangle2 bg-white relative'>
                         <Image src={product5} alt="product" />
                     </div>
 
@@ -88,7 +89,7 @@ const Products = () => {
                 </div>
 
                 <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>                        
+                    <div className='rectangle2 bg-white relative'>
                         <Image src={product6} alt="product" />
                     </div>
 
@@ -99,7 +100,7 @@ const Products = () => {
                 </div>
 
                 <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>                        
+                    <div className='rectangle2 bg-white relative'>
                         <Image src={product7} alt="product" />
                     </div>
 
@@ -110,7 +111,7 @@ const Products = () => {
                 </div>
 
                 <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>                        
+                    <div className='rectangle2 bg-white relative'>
                         <Image src={product7} alt="product" />
                     </div>
 
@@ -119,11 +120,12 @@ const Products = () => {
 
                     <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
                 </div>
-                
+
             </div>
 
             <div className='mx-auto mt-10 flex items-center justify-center'>
-                <CustomButton  title="View all products" className='border  bg-white py-3 px-24'/>
+                {/* <CustomButton  title="View all products" className='border  bg-white py-3 px-24'/> */}
+                <SecondaryButton title="View all products" className='px-16 py-3 bg-white text-primary' style={{ border: "2px solid #008BFF" }} />
             </div>
         </section>
     )
