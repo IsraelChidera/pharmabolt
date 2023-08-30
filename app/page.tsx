@@ -1,4 +1,4 @@
-import { BookConsultation, CreateAccount, Hero, Products, Testimonials, } from '@/components'
+import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonials, } from '@/components'
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
       <BookConsultation />
       <CreateAccount />
       <Testimonials />
+      <Newsletter />
     </main>
   )
 }

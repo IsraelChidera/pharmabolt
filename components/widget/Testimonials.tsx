@@ -2,7 +2,7 @@ import React from 'react'
 
 const Testimonials = () => {
     return (
-        <section className='mt-20'>
+        <section className='mt-40'>
             <div className='w-1/2 mx-auto text-center'>
                 <h3 className='text-2xl font-bold'>
                     Enjoy and benefit from true care

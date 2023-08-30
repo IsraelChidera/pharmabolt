@@ -8,6 +8,7 @@ import CustomButton from './elements/CustomButton';
 import SecondaryButton from './elements/SecondaryButton';
 import CreateAccount from './widget/CreateAccount';
 import Testimonials from './widget/Testimonials';
+import Newsletter from './widget/Newsletter';
 
 export {
     Hero,
@@ -18,5 +19,6 @@ export {
     SecondaryButton,
     BookConsultation,
     CreateAccount,
-    Testimonials
+    Testimonials,
+    Newsletter
 }
