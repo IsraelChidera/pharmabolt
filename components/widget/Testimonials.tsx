@@ -1,10 +1,24 @@
-import React from 'react'
+'use client';
+import React, {useState, useReducer} from 'react';
 
 const Testimonials = () => {
+
+    const [emailValid, setEmailValid] = useState(false);
+
+    const emailReducer = (state:any, action:any) => {
+        const isValidEmail = true;
+
+        setEmailValid(isValidEmail);
+
+        return action;
+        
+    }
+
+    const [email, setEmail] = useReducer(emailReducer, "");
     return (
         <section className='mt-40'>
             <div className='w-1/2 mx-auto text-center'>
-                <h3 className='text-2xl font-bold'>
+                <h3 className='text-2xl font-bold'>                    
                     Enjoy and benefit from true care
                     and great service delivery with <span className='text-primary'> no boundaries. </span>
                 </h3>
