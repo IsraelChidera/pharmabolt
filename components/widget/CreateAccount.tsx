@@ -8,16 +8,16 @@ import circle2 from '../../public/assets/circle.png';
 const CreateAccount = () => {
     return (
         <section className='mt-40 mx-auto md:w-5/6 relative'>
-            <Image src={circle} alt="sign up image" className='absolute left-0 bottom-0' />
-            <div className='flex justify-between space-x-20'>
-                <div className='relative'>
+            <Image src={circle} alt="sign up image" className=' absolute left-0 bottom-0' />
+            <div className='md:flex flex flex-col md:flex-row justify-between md:space-x-20'>
+                <div className='mt-10 md:mt-0 md:order-1 order-2 relative'>
                     <Image src={book} alt="sign up image" />
-                    <Image src={circle2} alt="sign up image" className='md:hidden absolute left-0 bottom-0' />
+                    <Image src={circle2} alt="sign up image" className='hidden absolute left-0 bottom-0' />
                 </div>
 
-                <section className='flex items-end justify-end'>
-                    <div className='space-y-4 text-right'>
-                        <div className='text-5xl font-bold relative'>
+                <section className='md:order-1 md:flex md:items-end justify-end'>
+                    <div className='space-y-4 md:text-right text-center'>
+                        <div className='text-4xl md:text-5xl text-center md:text-right font-bold relative'>
                             <span>Get rewarded for</span> <br />
                             <span>sticking with us</span> <br />
                             <span>It's totally free!!!</span>
@@ -30,8 +30,7 @@ const CreateAccount = () => {
 
                         <CustomButton
                             title="Create an account"
-                            className='px-12 py-3 text-xs'
-                        // onClick={handleClick}
+                            className='px-12 py-3 text-xs'                        
                         />
                     </div>
                 </section>

@@ -5,7 +5,7 @@ const index = ({ title, className, onClick, style, ...rest }: SecondaryButtonPro
     return (
         <button 
             onClick={onClick}             
-            className={`rounded-lg  text-sm text-white ${className}`}
+            className={`rounded-lg md:text-sm text-xs text-white ${className}`}
             {...rest}
             style={style}
         >

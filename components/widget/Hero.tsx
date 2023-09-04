@@ -14,22 +14,32 @@ const Hero = () => {
 
     return (
         <header className='mx-auto md:w-5/6'>
-            <div className='flex justify-between'>
-                <section className='flex items-center'>
-                    <div className='space-y-4'>
-                        <div className='text-6xl font-bold relative'>
+            <div className='md:flex justify-between'>
+                <section className='md:flex items-center'>
+                    <div className='md:space-y-4 md:pt-0 '>
+                        <div className='flex justify-center md:hidden'>
+                            <Image src={line} alt="line icon" style={{ width: "255px", height:"255px" }} />
+                        </div>
+
+                        <div className='text-4xl text-center md:text-left md:text-6xl font-bold relative'>
                             <span>Your health is</span> <br />
                             <span className='text-primary'>our priority</span>
 
-                            <Image src={line} alt="line icon" className='absolute top-5 right-0' />
+                            <Image
+                                src={line}
+                                alt="line icon"
+                                className='md:block hidden absolute top-5 right-0'
+                            />
                         </div>
 
-                        <p className='text-xl w-3/4'>
+                        <p className='md:pt-0 pt-2 text-center md:text-left md:text-xl md:w-3/4'>
                             Get your medication delivered at your door
                             without delay or hassle.
                         </p>
 
-                        <CustomButton title=" Place an order" className='px-12 py-3' onClick={handleClick} />
+                        <div className='mt-2 md:mt-0 flex justify-center md:block'>
+                            <CustomButton title="Place an order" className='px-12 py-3' onClick={handleClick} />
+                        </div>
                     </div>
                 </section>
 
@@ -38,8 +48,8 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className='md:grid grid-cols-3 gap-x-6 gap-y-6 mt-14 mb-6'>
-                <div className='rectangle'>
+            <div className='mx-3 md:mx-0 md:grid grid-cols-3 gap-x-6 space-y-10 md:space-y-0 mt-14 mb-6'>
+                <div className='rectangle w-fit '>
                     <h3 className='font-bold text-lg'>
                         Consult a professional
                     </h3>
@@ -53,7 +63,7 @@ const Hero = () => {
                     <CustomButton title="Book now" className='px-4 py-1 text-xs mt-4' onClick={handleClick} />
                 </div>
 
-                <div className='rectangle'>
+                <div className='rectangle w-fit'>
                     <h3 className='font-bold text-lg'>
                         Upload your prescription
                     </h3>
@@ -67,7 +77,7 @@ const Hero = () => {
                     <CustomButton title="Upload now" className='px-4 py-1 text-xs mt-4' onClick={handleClick} />
                 </div>
 
-                <div className='rectangle'>
+                <div className='rectangle w-fit'>
                     <h3 className='font-bold text-lg'>
                         Purchase your medication
                     </h3>

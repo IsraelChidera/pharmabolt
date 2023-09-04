@@ -21,12 +21,12 @@ const Products = () => {
     }
 
     return (
-        <section className='mt-40 mx-auto md:w-5/6'>
+        <section className='md:mt-40 mt-32 mx-3 md:mx-auto md:w-5/6'>
             <h2 className='text-2xl font-bold text-center'>
                 Browse medication and products
             </h2>
 
-            <div className='pt-6 mt-10 md:grid grid-cols-4 gap-x-6 gap-y-10'>
+            <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 '>
                 <div className='flex flex-col justify-around'>
                     <div className='rectangle2 bg-white relative'>
                         <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
@@ -125,7 +125,7 @@ const Products = () => {
 
             <div className='mx-auto mt-10 flex items-center justify-center'>
                 {/* <CustomButton  title="View all products" className='border  bg-white py-3 px-24'/> */}
-                <SecondaryButton title="View all products" className='px-16 py-3 bg-white text-primary' style={{ border: "2px solid #008BFF" }} />
+                <SecondaryButton title="View all products" className='px-16 py-3 md:text-base text-sm bg-white text-primary' style={{ border: "2px solid #008BFF" }} />
             </div>
         </section>
     )
