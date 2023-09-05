@@ -1,6 +1,6 @@
 import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonials, } from '@/components'
-import { client } from './lib/sanity';
-// import { client } from '@/sanity/lib/client';
+import client from './lib/sanity';
+import { groq } from 'next-sanity';
 
 interface IProducts {
   Image: string,
@@ -16,13 +16,19 @@ async function getData() {
   return data;
 }
 
+const query = groq`*[_type == "product"]`;
+
 
 const Home = async () => {
 
-  const allProducts = await getData();
-  console.log("Data: ", allProducts);
+  // const allProducts = await getData();
+  // console.log("Data: ", allProducts);
 
   // console.log("all", allProducts);
+
+  const products:IProducts = await client.fetch(query);
+  console.log("Products: ", products);
+
 
 
   return (
@@ -37,17 +43,6 @@ const Home = async () => {
     </main>
   )
 }
-
-// export async function getStaticProps() {
-//   const query = `*[_type == "product"]`;
-//   const allProducts = await client.fetch(query);
-
-//   return {
-//     props: {
-//       allProducts
-//     }
-//   };
-// }
 
 
 export default Home
