@@ -9,28 +9,31 @@ import product4 from '../../public/assets/product4.png';
 import product5 from '../../public/assets/product5.png';
 import product6 from '../../public/assets/product6.png';
 import product7 from '../../public/assets/product7.png';
-import product8 from '../../public/assets/product8.png';
+// import product8 from '../../public/assets/product8.png';
 
 import { CustomButton, SecondaryButton } from '..';
-
 
 const Products = () => {
 
     const handleClick = () => {
-
     }
+
+
+    // console.log("allProducts", allProducts);
+
 
     return (
         <section className='md:mt-40 mt-32 mx-3 md:mx-auto md:w-5/6'>
             <h2 className='text-2xl font-bold text-center'>
                 Browse medication and products
             </h2>
+            {/* {allProducts.length > 0 && <>hi</>}         */}
 
-            <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 '>
+            <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-6 gap-y-6 '>
                 <div className='flex flex-col justify-around'>
                     <div className='rectangle2 bg-white relative'>
                         <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
-                            <p className='text-sm font-bold p-2'> Popular </p>
+                            <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
                         </div>
                         <Image src={product1} alt="product" />
                     </div>
@@ -44,7 +47,7 @@ const Products = () => {
                 <div className='flex flex-col justify-around'>
                     <div className='rectangle2 bg-white relative'>
                         <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
-                            <p className='text-sm font-bold p-2'> Popular </p>
+                            <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
                         </div>
                         <Image src={product2} alt="product" />
                     </div>
