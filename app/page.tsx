@@ -1,4 +1,5 @@
 import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonials, } from '@/components'
+import { client } from './lib/sanity';
 // import { client } from '@/sanity/lib/client';
 
 interface IProducts {
@@ -9,16 +10,26 @@ interface IProducts {
   Description: string
 }
 
-export default function Home({ allProducts }: { allProducts: IProducts }) {
-  console.log("all", allProducts);
-  
+async function getData() {
+  const query = `*[_type == "product"]`;
+  const data = await client.fetch(query);
+  return data;
+}
+
+
+const Home = async () => {
+
+  const allProducts = await getData();
+  console.log("Data: ", allProducts);
+
+  // console.log("all", allProducts);
+
+
   return (
     <main className=''>
 
       <Hero />
-      <Products
-      // allProducts={allProducts} 
-      />
+      <Products />
       <BookConsultation />
       <CreateAccount />
       <Testimonials />
@@ -27,22 +38,16 @@ export default function Home({ allProducts }: { allProducts: IProducts }) {
   )
 }
 
-export async function getStaticProps() {
-  // const allProducts = await client.fetch(`*[_type == "product"]`);
+// export async function getStaticProps() {
+//   const query = `*[_type == "product"]`;
+//   const allProducts = await client.fetch(query);
 
-  const allProducts: IProducts[] = [
-    {
-      Image: "sas",
-      Name: "Sas",
-      Description: "jkj sakl",
-      Price: 45,
-      Slug: "sas"
-    }
-  ]
+//   return {
+//     props: {
+//       allProducts
+//     }
+//   };
+// }
 
-  return {
-    props: {
-      allProducts
-    }
-  };
-}
+
+export default Home
