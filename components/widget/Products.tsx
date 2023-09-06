@@ -13,8 +13,9 @@ import product7 from '../../public/assets/product7.png';
 
 import { CustomButton, SecondaryButton } from '..';
 import Product from './Product';
+import { Product as Items } from '@/app/lib/interface';
 
-const Products = ({ products }: { products: any }) => {
+const Products = ({ products }: { products: Items[] }) => {
 
     const handleClick = () => {
     }
@@ -28,8 +29,19 @@ const Products = ({ products }: { products: any }) => {
             </h2>
 
             <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-6 gap-y-6 '>
-                <Product />
-                
+                {
+                    products.map((item) => (
+                        <Product 
+                            key={item.slug} 
+                            id={item._id}
+                            slug={item.slug}
+                            name={item.name} 
+                            image={item.image}                                
+                            price={item.price}
+                        />
+                    ))
+                }
+
                 <div className='flex flex-col justify-around'>
                     <div className='rectangle2 bg-white relative'>
                         <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
