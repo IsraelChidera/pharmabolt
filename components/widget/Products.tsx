@@ -28,7 +28,7 @@ const Products = ({ products }: { products: Items[] }) => {
                 Browse medication and products
             </h2>
 
-            <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-6 gap-y-6 '>
+            <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-6 space-y-5 md:space-y-10 '>
                 {
                     products.map((item) => (
                         <Product                             
