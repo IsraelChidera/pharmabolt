@@ -1,5 +1,4 @@
-export interface Product {
-    _id: any;
+export interface Product {   
     image: any;
     name: string;
     slug: any;

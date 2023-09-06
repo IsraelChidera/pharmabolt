@@ -20,7 +20,7 @@ const Products = ({ products }: { products: Items[] }) => {
     const handleClick = () => {
     }
 
-    console.log("allProducts", products);
+    // console.log("allProducts", products);
 
     return (
         <section className='md:mt-40 mt-32 mx-3 md:mx-auto md:w-5/6'>
@@ -31,110 +31,16 @@ const Products = ({ products }: { products: Items[] }) => {
             <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-6 gap-y-6 '>
                 {
                     products.map((item) => (
-                        <Product 
-                            key={item.slug} 
-                            id={item._id}
+                        <Product                             
+                            key={item.slug}                             
                             slug={item.slug}
                             name={item.name} 
                             image={item.image}                                
                             price={item.price}
+                            description={item.description}                         
                         />
                     ))
-                }
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
-                            <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
-                        </div>
-                        <Image src={product1} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Acebrofylline </p>
-                    <p className='text-xs'> NGN 7 850 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
-                            <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
-                        </div>
-                        <Image src={product2} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Blood Test Strip </p>
-                    <p className='text-xs'> NGN 7 950 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <Image src={product3} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Glucometer </p>
-                    <p className='text-xs'> NGN 12 590 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <Image src={product4} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Insulin Syringe </p>
-                    <p className='text-xs'> NGN 6 000 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <Image src={product5} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Inhaler </p>
-                    <p className='text-xs'> NGN 2 850 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <Image src={product6} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Plasminogen ... </p>
-                    <p className='text-xs'> NGN 27 850 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <Image src={product7} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Daibamit </p>
-                    <p className='text-xs'> NGN 6 435 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
-
-                <div className='flex flex-col justify-around'>
-                    <div className='rectangle2 bg-white relative'>
-                        <Image src={product7} alt="product" />
-                    </div>
-
-                    <p className='font-bold pt-2'> Metformin </p>
-                    <p className='text-xs'> NGN 5 788 </p>
-
-                    <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' onClick={handleClick} />
-                </div>
+                }                                           
 
             </div>
 

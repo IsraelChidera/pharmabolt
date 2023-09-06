@@ -5,13 +5,20 @@ import Link from 'next/link'
 import { urlfor } from '@/app/lib/sanity';
 
 
-// id = { item._id }
-// name = { item.name }
-// image = { item.image }
-// description = { item.description }
-// price = { item.price }
+const Product = ({ name, image, price, slug, description }: Product) => {
 
-const Product = ({ _id, name, image, price, slug }: Product) => {
+    const maxLengthOfProductName = 21;
+    const truncatedLongName = (name: string, maxLengthOfProductName: number) => {
+        if (name.length > maxLengthOfProductName) {
+            
+            // const words = name.split(' ');
+            const trauncatedWords = name.substring(0, maxLengthOfProductName-6)
+            return `${trauncatedWords} . . .`
+        }
+        
+        return name;        
+    }
+
     return (
         <section>
             <Link href={`/product/${slug.current}`} prefetch className='flex flex-col justify-around'>
@@ -22,7 +29,7 @@ const Product = ({ _id, name, image, price, slug }: Product) => {
                     <img src={urlfor(image.asset._ref)} alt={image.alt} />
                 </div>
 
-                <p className='font-bold pt-2'> {name} </p>
+                <p className='font-bold pt-2'> {truncatedLongName(name,21)} </p>
                 <p className='text-xs'> {price} </p>
 
                 <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' />
