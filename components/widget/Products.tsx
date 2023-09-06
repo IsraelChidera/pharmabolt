@@ -2,15 +2,6 @@
 
 import Image from 'next/image';
 import React from 'react';
-import product1 from '../../public/assets/product.png';
-import product2 from '../../public/assets/product2.png';
-import product3 from '../../public/assets/product3.png';
-import product4 from '../../public/assets/product4.png';
-import product5 from '../../public/assets/product5.png';
-import product6 from '../../public/assets/product6.png';
-import product7 from '../../public/assets/product7.png';
-// import product8 from '../../public/assets/product8.png';
-
 import { CustomButton, SecondaryButton } from '..';
 import Product from './Product';
 import { Product as Items } from '@/app/lib/interface';

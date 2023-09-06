@@ -3,11 +3,11 @@ import { CustomButton } from '..'
 import { Product } from '@/app/lib/interface';
 import Link from 'next/link'
 import { urlfor } from '@/app/lib/sanity';
-
+import { useRouter } from 'next/navigation';
 
 const Product = ({ name, image, price, slug, description }: Product) => {
 
-    const maxLengthOfProductName = 21;
+    const maxLengthOfProductName = 25;
     const truncatedLongName = (name: string, maxLengthOfProductName: number) => {
         if (name.length > maxLengthOfProductName) {
             
@@ -32,7 +32,11 @@ const Product = ({ name, image, price, slug, description }: Product) => {
                 <p className='font-bold pt-2'> {truncatedLongName(name,21)} </p>
                 <p className='text-xs'> {price} </p>
 
-                <CustomButton title="Add to cart" className='w-full py-2 text-xs mt-4' />
+                <CustomButton 
+                    title="Add to cart" 
+                    className='w-full py-2 text-xs mt-4' 
+                    // onClick={() => router.push(`/product/${slug.current}`)} 
+                />
             </Link>
         </section>
     )
