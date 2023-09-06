@@ -12,24 +12,24 @@ import product7 from '../../public/assets/product7.png';
 // import product8 from '../../public/assets/product8.png';
 
 import { CustomButton, SecondaryButton } from '..';
+import Product from './Product';
 
-const Products = () => {
+const Products = ({ products }: { products: any }) => {
 
     const handleClick = () => {
     }
 
-
-    // console.log("allProducts", allProducts);
-
+    console.log("allProducts", products);
 
     return (
         <section className='md:mt-40 mt-32 mx-3 md:mx-auto md:w-5/6'>
             <h2 className='text-2xl font-bold text-center'>
                 Browse medication and products
             </h2>
-            {/* {allProducts.length > 0 && <>hi</>}         */}
 
             <div className='pt-6 mt-10 grid grid-cols-2 md:grid-cols-4 gap-x-2 md:gap-x-6 gap-y-6 '>
+                <Product />
+                
                 <div className='flex flex-col justify-around'>
                     <div className='rectangle2 bg-white relative'>
                         <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>

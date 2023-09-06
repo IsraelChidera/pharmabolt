@@ -1,14 +1,7 @@
 import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonials, } from '@/components'
 import client from './lib/sanity';
 import { groq } from 'next-sanity';
-
-interface IProducts {
-  Image: string,
-  Name: string,
-  Slug: string,
-  Price: number,
-  Description: string
-}
+import { Product } from './lib/interface';
 
 async function getData() {
   const query = `*[_type == "product"]`;
@@ -19,23 +12,18 @@ async function getData() {
 const query = groq`*[_type == "product"]`;
 
 
-const Home = async () => {
+export default async function Home() {
 
-  // const allProducts = await getData();
-  // console.log("Data: ", allProducts);
+  const products = await client.fetch(query) as Product[];  
 
-  // console.log("all", allProducts);
-
-  const products:IProducts = await client.fetch(query);
-  console.log("Products: ", products);
-
+  // const data = await getData() as Product[];
+  // console.log("data", data);
 
 
   return (
-    <main className=''>
-
+    <main className=''>      
       <Hero />
-      <Products />
+      <Products products={products} />
       <BookConsultation />
       <CreateAccount />
       <Testimonials />
@@ -45,4 +33,3 @@ const Home = async () => {
 }
 
 
-export default Home
