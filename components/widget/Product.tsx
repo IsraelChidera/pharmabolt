@@ -20,7 +20,7 @@ const Product = ({ name, image, price, slug, description }: Product) => {
     }
 
     return (
-        <section className='flex '>
+        <section className='flex justify-center'>
             <Link href={`/product/${slug.current}`} prefetch className='flex flex-col justify-around'>
                 <div className='rectangle2 bg-white relative'>
                     <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
