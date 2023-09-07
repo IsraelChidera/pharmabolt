@@ -21,7 +21,11 @@ const Product = ({ name, image, price, slug, description }: Product) => {
 
     return (
         <section className='flex justify-center'>
-            <Link href={`/product/${slug.current}`} prefetch className='flex flex-col justify-around'>
+            <Link 
+                href={`/product/${slug.current}`} 
+                prefetch 
+                className='flex flex-col justify-around'
+            >
                 <div className='rectangle2 bg-white relative'>
                     <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
                         <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
@@ -30,7 +34,7 @@ const Product = ({ name, image, price, slug, description }: Product) => {
                 </div>
 
                 <p className='font-bold pt-2'> {truncatedLongName(name,21)} </p>
-                <p className='text-xs'> {price} </p>
+                <p className='text-xs'>NGN {price} </p>
 
                 <CustomButton 
                     title="Add to cart" 

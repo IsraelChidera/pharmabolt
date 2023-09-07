@@ -12,3 +12,4 @@ export interface SecondaryButtonProps {
   style?: any;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
+

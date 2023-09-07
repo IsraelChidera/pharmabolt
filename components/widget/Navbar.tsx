@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import logo from '../../public/assets/logo.svg';
 import search from '../../public/assets/search-icon.svg';
@@ -20,7 +21,7 @@ const Navbar = () => {
     <nav className='bg-white shadow'>
       <div className='mx-auto md:block hidden md:w-5/6 md:py-4'>
         <div style={{ borderColor: "#e6e6e6" }} className='border-b pb-2 flex justify-between space-x-40 items-center'>
-          <div> <Image src={logo} alt="pharmabolt logo" /> </div>
+          <Link prefetch href="/"> <Image src={logo} alt="pharmabolt logo" /> </Link>
 
           <div className='grid grid-cols-4 w-full items-center text-xs'>
 
@@ -71,7 +72,7 @@ const Navbar = () => {
 
       {/* Mobile navigation */}
       <div className='flex justify-between px-4 py-6 md:hidden'>
-        <div> <Image src={logo} alt="pharmabolt logo" style={{ width: "50px" }} /> </div>
+        <Link prefetch href="/"> <Image src={logo} alt="pharmabolt logo" style={{ width: "50px" }} /> </Link>
 
         <div className='flex items-center space-x-5'>
           <Image src={search} alt="mobile search icon" style={{ width: "18px" }} />
