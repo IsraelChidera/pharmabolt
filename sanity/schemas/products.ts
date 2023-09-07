@@ -43,5 +43,15 @@ export default {
       title: 'Description',
       type: 'string',
     },
+    {
+        name: 'popularproducts',
+        title: 'PopularProducts',
+        type: 'boolean'
+    },
+    {
+        name: 'categories',
+        title: 'Categories',
+        type: 'string'
+    }
   ],
 }

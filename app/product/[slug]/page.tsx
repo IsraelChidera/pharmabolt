@@ -19,7 +19,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
 
   return (
     <section className='md:mx-auto md:w-5/6 mx-4 mt-12'>
-      <div className='md:grid md:grid-cols-2 md:gap-x-10 border-b pb-8'>
+      <div className='md:grid md:grid-cols-2 md:gap-x-10 border-b md:pt-10 md:pb-20 pb-8'>
         <div className='flex justify-center items-center rectangle'>
           <img src={urlfor(products.image.asset._ref).url()} alt={products.slug.current} />
         </div>
@@ -48,7 +48,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
         </div>
       </div>
 
-      <div>
+      <div className='md:mt-20 md:mb-20'>
         <div className='pt-6 pb-10 mt-10 grid-container '>
           {
             allProducts.slice(0,4).map((item) => (
