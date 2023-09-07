@@ -3,7 +3,7 @@ import { CustomButton } from '..'
 import { Product } from '@/app/lib/interface';
 import Link from 'next/link'
 import { urlfor } from '@/app/lib/sanity';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 const Product = ({ name, image, price, slug, description }: Product) => {
 
@@ -30,7 +30,7 @@ const Product = ({ name, image, price, slug, description }: Product) => {
                     <div className='absolute top-0 left-0' style={{ background: "#fffcbc" }}>
                         <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
                     </div>
-                    <img src={urlfor(image.asset._ref)} alt={image.alt} />
+                    <img src={urlfor(image.asset._ref).url()} alt={image.alt} />
                 </div>
 
                 <p className='font-bold pt-2'> {truncatedLongName(name,21)} </p>

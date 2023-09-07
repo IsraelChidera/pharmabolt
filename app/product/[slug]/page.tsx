@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import product from '../../../public/assets/product.png';
 import { CustomButton } from '@/components';
-import client from '../../lib/sanity';
+import client, { urlfor } from '../../lib/sanity';
 import { groq } from 'next-sanity';
 import { PageProps, Product as Prod } from '../..//lib/interface';
 import Product from '@/components/widget/Product';
@@ -15,16 +15,21 @@ import Product from '@/components/widget/Product';
 const Page = async ({ params: { slug } }: PageProps) => {
   const query = groq`*[_type == "product" && slug.current == '${slug}'][0]`;
   const products = await client.fetch(query) as Prod;
-  console.log("prod", products.name);
+
+  const queryAllProducts = groq`*[_type == "product"]`;
+  const allProducts = await client.fetch(queryAllProducts) as Product[];
+
+  console.log("all: ", allProducts);
+
 
   return (
     <section className='md:mx-auto md:w-5/6 mx-4 mt-12'>
       <div className='md:grid md:grid-cols-2 md:gap-x-10 border-b pb-8'>
         <div className='flex justify-center items-center rectangle'>
-          <Image src={product} alt="product" />
+          <img src={urlfor(products.image.asset._ref).url()} alt={products.slug.current} />
         </div>
 
-        <div className='md:mt-0 mt-10'>
+        <div className='md:mt-0 mt-6'>
           <h1 className='font-bold text-xl md:text-2xl'> {products.name}</h1>
           <p className='md:text-xl'> NGN {products.price} </p>
           <p className='text-xs mt-4 font-bold' style={{ color: "#039E00" }}>Available</p>
@@ -49,9 +54,9 @@ const Page = async ({ params: { slug } }: PageProps) => {
       </div>
 
       <div>
-        <div className='pt-6 mt-10 grid-container '>
-          {/* {
-            products.map((item) => (
+        <div className='pt-6 pb-10 mt-10 grid-container '>
+          {
+            allProducts.map((item) => (
               <Product
                 key={item.slug}
                 slug={item.slug}
@@ -61,7 +66,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
                 description={item.description}
               />
             ))
-          } */}
+          }
 
         </div>
       </div>

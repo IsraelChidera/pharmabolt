@@ -3,11 +3,6 @@ import client from './lib/sanity';
 import { groq } from 'next-sanity';
 import { Product } from './lib/interface';
 
-async function getData() {
-  const query = `*[_type == "product"]`;
-  const data = await client.fetch(query);
-  return data;
-}
 
 const query = groq`*[_type == "product"]`;
 
