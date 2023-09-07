@@ -9,17 +9,12 @@ import Product from '@/components/widget/Product';
 
 
 
-
-
-
 const Page = async ({ params: { slug } }: PageProps) => {
   const query = groq`*[_type == "product" && slug.current == '${slug}'][0]`;
   const products = await client.fetch(query) as Prod;
 
   const queryAllProducts = groq`*[_type == "product"]`;
-  const allProducts = await client.fetch(queryAllProducts) as Product[];
-
-  console.log("all: ", allProducts);
+  const allProducts = await client.fetch(queryAllProducts) as Product[];  
 
 
   return (
@@ -56,7 +51,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
       <div>
         <div className='pt-6 pb-10 mt-10 grid-container '>
           {
-            allProducts.map((item) => (
+            allProducts.slice(0,4).map((item) => (
               <Product
                 key={item.slug}
                 slug={item.slug}
