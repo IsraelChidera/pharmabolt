@@ -51,7 +51,7 @@ const page = () => {
 
                                     <li 
                                         key={index} 
-                                        onClick={handleCategoryChange(item)}
+                                        onClick={() => handleCategoryChange(item)}
                                         >
                                         <span> {item} </span>
                                     </li>
