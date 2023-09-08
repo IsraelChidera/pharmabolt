@@ -13,3 +13,9 @@ export interface PageProps {
     slug: string;
   };
 }
+
+export interface ProductContextType {
+    products: Product[];
+    loading: Boolean;
+    error: string | null;
+}

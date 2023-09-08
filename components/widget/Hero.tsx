@@ -18,7 +18,7 @@ const Hero = () => {
                 <section className='md:flex items-center'>
                     <div className='md:space-y-4 md:pt-0 '>
                         <div className='flex justify-center md:hidden'>
-                            <Image src={line} alt="line icon" style={{ width: "255px", height:"255px" }} />
+                            <Image src={line} alt="line icon" style={{ width: "255px", height: "255px" }} />
                         </div>
 
                         <div className='text-4xl text-center md:text-left md:text-6xl font-bold relative'>
@@ -44,7 +44,7 @@ const Hero = () => {
                 </section>
 
                 <div>
-                    <Image src={hero} alt="hero image" className='hero-image' />
+                    <Image src={hero} style={{ objectFit: "cover" }} alt="hero image" className='hero-image' />
                 </div>
             </div>
 
