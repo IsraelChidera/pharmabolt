@@ -9,10 +9,9 @@ const query = groq`*[_type == "product"]`;
 
 export default async function Home() {
 
-  const products = await client.fetch(query) as Product[];  
+  const products = await client.fetch(query);  
 
-  // const data = await getData() as Product[];
-  // console.log("data", data);
+  console.log("all p: ", products);  
 
 
   return (

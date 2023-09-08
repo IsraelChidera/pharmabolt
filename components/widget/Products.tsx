@@ -7,11 +7,11 @@ import Product from './Product';
 import { Product as Items } from '@/app/lib/interface';
 
 const Products = ({ products }: { products: Items[] }) => {
+    
 
-    const handleClick = () => {
-    }
-
-    // console.log("allProducts", products);
+    // console.log("allProducts: ", products);
+    // console.log("dd");
+    
 
     return (
         <section className='md:mt-40 mt-32 mx-3 md:mx-auto md:w-5/6'>
@@ -28,7 +28,9 @@ const Products = ({ products }: { products: Items[] }) => {
                             name={item.name} 
                             image={item.image}                                
                             price={item.price}
-                            description={item.description}                         
+                            description={item.description}  
+                            popularproducts={item.popularproducts}                       
+                            categories={item.categories}
                         />
                     ))
                 }                                           

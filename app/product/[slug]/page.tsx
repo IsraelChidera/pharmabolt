@@ -59,6 +59,8 @@ const Page = async ({ params: { slug } }: PageProps) => {
                 image={item.image}
                 price={item.price}
                 description={item.description}
+                popularproducts={item.popularproducts}                       
+                categories={item.categories}
               />
             ))
           }

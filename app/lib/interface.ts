@@ -3,7 +3,9 @@ export interface Product {
   name: string;
   slug: any;
   price: number;
-  description: string;
+  description: string;  
+  categories: string;
+  popularproducts: boolean;
 }
 
 export interface PageProps {
