@@ -11,7 +11,7 @@ export default async function Home() {
 
   const products = await client.fetch(query);  
 
-  console.log("all p: ", products);  
+  // console.log("all p: ", products);  
 
 
   return (

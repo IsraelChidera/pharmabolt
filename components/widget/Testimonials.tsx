@@ -16,7 +16,7 @@ const Testimonials = () => {
 
     const [email, setEmail] = useReducer(emailReducer, "");
     return (
-        <section className='mt-40'>
+        <section className='border-t pt-10 mt-32 md:mt-40'>
             <div className='md:w-1/2 w-5/6 mx-auto text-center'>
                 <h3 className='text-2xl font-bold'>                    
                     Enjoy and benefit from true care

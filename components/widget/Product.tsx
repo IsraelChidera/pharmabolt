@@ -35,7 +35,7 @@ const Product = ({ name, image, price, slug, description, popularproducts, categ
 
                 <p className='font-bold pt-2'> {truncatedLongName(name, 21)} </p>
                 <p className='text-xs'>NGN {price} </p>
-                <p className='text-xs'>NGN {categories} </p>
+                {/* <p className='text-xs'>NGN {categories} </p> */}
 
                 <CustomButton
                     title="Add to cart"

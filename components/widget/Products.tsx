@@ -7,19 +7,17 @@ import Product from './Product';
 import { Product as Items } from '@/app/lib/interface';
 
 const Products = ({ products }: { products: Items[] }) => {
+       
     
-
-    // console.log("allProducts: ", products);
-    // console.log("dd");
-    
-
     return (
-        <section className='md:mt-40 mt-32 mx-3 md:mx-auto md:w-5/6'>
-            <h2 className='text-2xl font-bold text-center'>
+        <section className='md:mt-40 mt-20 mx-3 md:mx-auto md:w-5/6'>
+            <h2 className='md:text-2xl text-lg font-bold text-center'>
                 Browse medication and products
             </h2>
 
-            <div className='pt-6 mt-10 grid-container '>
+            <div className="md:hidden block border-b mx-20 pb-2"> </div>
+
+            <div className='pt-6 mt-4 md:mt-10 grid-container '>
                 {
                     products.map((item) => (
                         <Product                             
@@ -37,7 +35,7 @@ const Products = ({ products }: { products: Items[] }) => {
 
             </div>
 
-            <div className='mx-auto mt-10 flex items-center justify-center'>
+            <div className='mx-auto md:mt-12 mt-14 flex items-center justify-center'>
                 {/* <CustomButton  title="View all products" className='border  bg-white py-3 px-24'/> */}
                 <SecondaryButton title="View all products" className='px-16 py-3 md:text-base text-sm bg-white text-primary' style={{ border: "2px solid #008BFF" }} />
             </div>

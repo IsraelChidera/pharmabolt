@@ -14,7 +14,7 @@ const Newsletter = () => {
                 <h3 className='text-2xl font-bold'>
                     Join our e-mail list
                 </h3>
-                <p className='text-sm mt-2'>
+                <p className='text-xs md:text-sm mt-2'>
                     Subscribe to our email list and be the first to get updates and news from us!
                 </p>
             </div>

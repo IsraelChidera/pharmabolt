@@ -32,7 +32,7 @@ const Hero = () => {
                             />
                         </div>
 
-                        <p className='md:pt-0 pt-2 text-center md:text-left md:text-xl md:w-3/4'>
+                        <p className='md:pt-0 text-xs pt-2 text-center md:text-left md:text-xl md:w-3/4'>
                             Get your medication delivered at your door
                             without delay or hassle.
                         </p>
@@ -54,7 +54,7 @@ const Hero = () => {
                         Consult a professional
                     </h3>
 
-                    <p className='pt-2 text-sm'>
+                    <p className='pt-2 text-xs md:text-sm'>
                         Book an appointment with
                         an expert and be attended
                         to in minutes.
@@ -68,7 +68,7 @@ const Hero = () => {
                         Upload your prescription
                     </h3>
 
-                    <p className='pt-2 text-sm'>
+                    <p className='pt-2 text-xs md:text-sm'>
                         Have a prescription from a doctor?
                         Upload it now and we will
                         deliver it to you.
@@ -82,7 +82,7 @@ const Hero = () => {
                         Purchase your medication
                     </h3>
 
-                    <p className='pt-2 text-sm'>
+                    <p className='pt-2 text-xs md:text-sm'>
                         Place an order for your medication
                         and it will be available
                         in no time.

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer style={{ background: "#0E2133" }}>
       <div className='pt-10 pb-6 px-6 md:flex text-center md:text-left justify-between items-center'>
-        <p className='text-white text-sm'>
+        <p className='text-white text-xs md:text-sm'>
           Copyright ©2022 PharmaBolt. All Rights Reserved
         </p>
 
