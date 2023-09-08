@@ -100,25 +100,16 @@ const Navbar = () => {
         >
           <div>
             <ul className='space-y-6 text-center'>
-              <li>
-                <Link onClick={() => setOpen(false)} href="/"> Home </Link>
-              </li>
+              <NavigationItem onClick={() => setOpen(false)} href="/">Home</NavigationItem>
 
-              <li>
-                <Link onClick={() => setOpen(false)} href="/shop"> Shop </Link>
-              </li>
+              <NavigationItem onClick={() => setOpen(false)} href="/shop">Shop</NavigationItem>
 
-              <li>
-                <Link onClick={() => setOpen(false)} href="#"> Book a consultation </Link>
-              </li>
+              <NavigationItem href="#">Book a consultation</NavigationItem>
 
-              <li>
-                <Link onClick={() => setOpen(false)} href="#"> Upload a prescription </Link>
-              </li>
+              <NavigationItem onClick={() => setOpen(false)} href="#">Upload a prescription</NavigationItem>
 
-              <li>
-                <Link onClick={() => setOpen(false)} href="#"> Contact us </Link>
-              </li>
+              <NavigationItem onClick={() => setOpen(false)} href="#">Contact us</NavigationItem>
+
             </ul>
 
             <div className='mt-12 space-y-6 flex flex-col '>
