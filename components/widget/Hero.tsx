@@ -13,7 +13,7 @@ const Hero = () => {
     }
 
     return (
-        <header className='mx-auto md:w-5/6'>
+        <header className='mx-auto md:w-5/6 mt-10 md:mt-0'>
             <div className='md:flex justify-between'>
                 <section className='md:flex items-center'>
                     <div className='md:space-y-4 md:pt-0 '>

@@ -76,7 +76,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile navigation */}
-      <div className='flex justify-between px-4 py-6 md:hidden'>
+      <div className='fixed top-0 left-0 w-full bg-white z-40 flex justify-between px-4 py-6 md:hidden'>
         <Link prefetch href="/"> <Image src={logo} alt="pharmabolt logo" style={{ width: "50px" }} /> </Link>
 
         <div className='flex items-center space-x-5'>
