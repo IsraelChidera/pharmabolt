@@ -9,8 +9,7 @@ const Product = ({ name, image, price, slug, description, popularproducts, categ
 
     const truncatedLongName = (name: string, maxLengthOfProductName: number) => {
         if (name.length > maxLengthOfProductName) {
-
-            // const words = name.split(' ');
+            
             const trauncatedWords = name.substring(0, maxLengthOfProductName - 6)
             return `${trauncatedWords} . . .`
         }

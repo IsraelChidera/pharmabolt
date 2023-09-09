@@ -5,32 +5,46 @@ import { Product } from '../lib/interface';
 import { groq } from 'next-sanity';
 import client from '../lib/sanity';
 import products from '@/sanity/schemas/products';
+import Link from "next/link";
 
 const page = () => {
-    const [allDrugProduct, setAllDrugProduct] = useState<Product[]>([]);
+
     const queryAllProducts = groq`*[_type == "product"]`;
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | any>("");
+    const [allDrugProduct, setAllDrugProduct] = useState<Product[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string | any>(null);
     // *[_type == 'product' && categories == 'Others']
-    const fetchData = async() => {
-        const allProducts = await client.fetch(queryAllProducts) as Product[];
-        setAllDrugProduct(allProducts);
+
+    const fetchData = async () => {
+        try {
+            const allProducts = await client.fetch(queryAllProducts) as Product[];
+            setAllDrugProduct(allProducts);
+            setLoading(false);
+
+        } catch (error) {
+            console.log("Error: ", error)
+            setError(error);
+            setLoading(false);
+        }
     }
 
-    useEffect(() => {        
+    useEffect(() => {
         fetchData();
-    }, [allDrugProduct])
+    }, [])
 
     const categories = allDrugProduct.map(product => product.categories);
 
     const category = [...new Set(categories.flat())]
 
-    const categoryProducts = allDrugProduct.filter(product => product.categories === "Others");
-    // console.log("cate: ", categoryProducts);
+    const categoryProducts = selectedCategory ? allDrugProduct.filter(product => product.categories.includes(selectedCategory)) : allDrugProduct;
 
-    const [selectedCategory, setSelectedCategory] = useState(category[0]);
 
-    const handleCategoryChange = (category: any) => {
-        setSelectedCategory(category)
+
+    const handleCategoryChange = (categorySelect: string) => {
+        setSelectedCategory(categorySelect)
     }
+
 
     return (
         <section className='relative flex'>
@@ -49,11 +63,11 @@ const page = () => {
                             {
                                 category.map((item, index) => (
 
-                                    <li 
-                                        key={index} 
+                                    <li
+                                        key={index}
                                         onClick={() => handleCategoryChange(item)}
-                                        >
-                                        <span> {item} </span>
+                                    >
+                                        <span className={selectedCategory ? `text-red-200` : ``}> {item} </span>
                                     </li>
 
                                 ))
@@ -63,8 +77,41 @@ const page = () => {
                 </div>
             </aside>
 
-            <main className='pl-4'>
-                main
+            <main className='pl-4 w-full'>
+                {
+                    error &&
+                    <div className='pt-4 flex h-screen items-center justify-center text-center w-full text-sm'>
+                        <p>
+                            There was an error loading the products. Click{" "}
+                            <span
+                                onClick={() => location.reload()}
+                                className="underline cursor-pointer"
+                            >
+                                here
+                            </span>{" "}
+                            to refresh or return to{" "}
+                            <Link href="/" className="underline">
+                                {" "}
+                                Home{" "}
+                            </Link>
+                        </p>
+                    </div>
+                }
+
+                {
+                    loading && <div>
+                        <p className='text-sm pt-4 text-center w-full'>
+                            Loading products  . . .
+                        </p>
+                    </div>
+                }
+
+                {
+                    !loading &&
+                    categoryProducts.map((e, i) => (
+                        <p>i</p>
+                    ))
+                }
             </main>
         </section>
     )
