@@ -43,8 +43,20 @@ body {
   grid-gap: 2rem;
 }
 
+.grid-container2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
+}
+
 @media only screen and (max-width: 767px) {
   .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+  }
+
+  .grid-container2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;

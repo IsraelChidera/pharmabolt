@@ -1,24 +1,25 @@
 'use client'
 
 import React, { useState, useContext, useEffect } from 'react'
-import { Product } from '../lib/interface';
+import { Product as Prod } from '../lib/interface';
 import { groq } from 'next-sanity';
 import client from '../lib/sanity';
 import products from '@/sanity/schemas/products';
 import Link from "next/link";
+import Product from '@/components/widget/Product';
 
 const page = () => {
 
     const queryAllProducts = groq`*[_type == "product"]`;
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | any>("");
-    const [allDrugProduct, setAllDrugProduct] = useState<Product[]>([]);
+    const [allDrugProduct, setAllDrugProduct] = useState<Prod[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | any>(null);
     // *[_type == 'product' && categories == 'Others']
 
     const fetchData = async () => {
         try {
-            const allProducts = await client.fetch(queryAllProducts) as Product[];
+            const allProducts = await client.fetch(queryAllProducts) as Prod[];
             setAllDrugProduct(allProducts);
             setLoading(false);
 
@@ -39,6 +40,7 @@ const page = () => {
 
     const categoryProducts = selectedCategory ? allDrugProduct.filter(product => product.categories.includes(selectedCategory)) : allDrugProduct;
 
+    console.log("cate: ", categoryProducts);
 
 
     const handleCategoryChange = (categorySelect: string) => {
@@ -60,6 +62,10 @@ const page = () => {
                     <div>
                         <h2 style={{ color: "#5E5E5E" }} className='text-sm mt-6 font-bold'>CATEGORIES</h2>
                         <ul style={{ color: "#A0A0A0" }} className='mt-4 space-y-4 text-sm'>
+                            <li onClick={() => handleCategoryChange(selectedCategory)}>
+                                <span>All</span>
+                            </li>
+
                             {
                                 category.map((item, index) => (
 
@@ -67,17 +73,18 @@ const page = () => {
                                         key={index}
                                         onClick={() => handleCategoryChange(item)}
                                     >
-                                        <span className={selectedCategory ? `text-red-200` : ``}> {item} </span>
+                                        <span className={selectedCategory === item ? `text-primary` : ``}> {item} </span>
                                     </li>
 
                                 ))
                             }
+
                         </ul>
                     </div>
                 </div>
             </aside>
 
-            <main className='pl-4 w-full'>
+            <main className='p-4 w-full'>
                 {
                     error &&
                     <div className='pt-4 flex h-screen items-center justify-center text-center w-full text-sm'>
@@ -106,12 +113,25 @@ const page = () => {
                     </div>
                 }
 
-                {
-                    !loading &&
-                    categoryProducts.map((e, i) => (
-                        <p>i</p>
-                    ))
-                }
+                <div className='pt-6 pb-10 mt-4 md:mt-10 grid-container2 '>
+                    {
+                        !loading &&
+                        categoryProducts.map((item) => (
+                            <Product
+                                key={item.slug}
+                                slug={item.slug}
+                                name={item.name}
+                                image={item.image}
+                                price={item.price}
+                                description={item.description}
+                                popularproducts={item.popularproducts}
+                                categories={item.categories}
+                            />
+                        ))
+                    }
+                </div>
+
+
             </main>
         </section>
     )
