@@ -40,8 +40,6 @@ const page = () => {
 
     const categoryProducts = selectedCategory ? allDrugProduct.filter(product => product.categories.includes(selectedCategory)) : allDrugProduct;
 
-    console.log("cate: ", categoryProducts);
-
 
     const handleCategoryChange = (categorySelect: string) => {
         setSelectedCategory(categorySelect)
@@ -62,9 +60,9 @@ const page = () => {
                     <div>
                         <h2 style={{ color: "#5E5E5E" }} className='text-sm mt-6 font-bold'>CATEGORIES</h2>
                         <ul style={{ color: "#A0A0A0" }} className='mt-4 space-y-4 text-sm'>
-                            <li onClick={() => handleCategoryChange(selectedCategory)}>
+                            {/* <li onClick={() => handleCategoryChange(selectedCategory)}>
                                 <span>All</span>
-                            </li>
+                            </li> */}
 
                             {
                                 category.map((item, index) => (
@@ -72,8 +70,9 @@ const page = () => {
                                     <li
                                         key={index}
                                         onClick={() => handleCategoryChange(item)}
+                                        className='cursor-pointer'
                                     >
-                                        <span className={selectedCategory === item ? `text-primary` : ``}> {item} </span>
+                                        <span className={selectedCategory === item ? `text-primary ` : ``}> {item} </span>
                                     </li>
 
                                 ))
