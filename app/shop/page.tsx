@@ -14,7 +14,7 @@ const page = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | any>("");
     const [allDrugProduct, setAllDrugProduct] = useState<Prod[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<string | any>(null);
+
     // *[_type == 'product' && categories == 'Others']
 
     const fetchData = async () => {
@@ -38,8 +38,11 @@ const page = () => {
 
     const category = [...new Set(categories.flat())]
 
+    const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
+
     const categoryProducts = selectedCategory ? allDrugProduct.filter(product => product.categories.includes(selectedCategory)) : allDrugProduct;
 
+    const [open, setOpen] = useState(false);
 
     const handleCategoryChange = (categorySelect: string) => {
         setSelectedCategory(categorySelect)
@@ -47,10 +50,10 @@ const page = () => {
 
 
     return (
-        <section className='relative flex'>
+        <section className='relative md:flex'>
             <aside
                 style={{ background: "#fafafa" }}
-                className='w-72 h-screen flex justify-center'
+                className='w-72 h-screen md:flex hidden justify-center'
             >
                 <div className='pt-12'>
                     <div>
@@ -83,7 +86,50 @@ const page = () => {
                 </div>
             </aside>
 
-            <main className='p-4 w-full'>
+            <main className='mt-20 md:mt-0 p-4 relative'>
+                <div className='md:hidden block px-3 absolute top-0 left-0 z-50 w-full'>
+                    <ul>
+                        <li
+                            style={{
+                                border: "1px solid #008BFF",
+                                borderRadius: "5px",
+                            }}
+                            className='w-full border px-2 py-3'
+                            onClick={() => setOpen(prev => !prev)}
+                        >
+                            {
+                                selectedCategory
+                            }
+                        </li>
+
+
+                        <div>
+                            {
+                                open &&
+                                <div className='rectangle'>
+                                    {
+                                        category.map((item, index) => (
+
+                                            <div key={index} className='flex items-center justify-center text-center '>
+
+                                                <li
+                                                    onClick={() => {
+                                                        handleCategoryChange(item); 
+                                                        setOpen(false);
+                                                    }}
+                                                    className='cursor-pointer pb-4'
+                                                >
+                                                    <span className={selectedCategory === item ? `text-primary ` : ``}> {item} </span>
+                                                </li>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </ul>
+                </div>
+
                 {
                     error &&
                     <div className='pt-4 flex h-screen items-center justify-center text-center w-full text-sm'>
@@ -112,7 +158,7 @@ const page = () => {
                     </div>
                 }
 
-                <div className='pt-6 pb-10 mt-4 md:mt-10 grid-container2 '>
+                <div className='pt-6 pb-10 mt-20 md:mt-10 grid-container2 '>
                     {
                         !loading &&
                         categoryProducts.map((item) => (
