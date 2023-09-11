@@ -206,7 +206,7 @@ const page = () => {
                         <p className='font-semibold'>NGN 0.00</p>
                     </div>
 
-                    <div className='border-t pt-2 mt-6 flex justify-between'>
+                    <div className='border-t border-b md:border-none pb-3 md:pb-0 pt-3 mt-6 flex justify-between'>
                         <p>Total: </p>
                         <p className='font-semibold'>NGN 13 738</p>
                     </div>
