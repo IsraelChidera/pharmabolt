@@ -1,11 +1,16 @@
+'use client'
+
 import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import product1 from '../../public/assets/product.png';
 import deleteIcon from '../../public/assets/delete-icon.png';
 import { CustomButton } from '@/components';
+import { useRouter } from "next/navigation";
 
 const page = () => {
+
+    const navigate = useRouter();
     return (
         <section className="px-3 md:mx-auto md:max-w-6xl mt-20 pb-10">
             <div className="flex items-end justify-between">
@@ -115,7 +120,11 @@ const page = () => {
                         </div>
 
                         <div className='mt-10'>
-                            <CustomButton className='w-full py-3' title="Proceed to Checkout" />
+                            <CustomButton 
+                                className='w-full py-3' 
+                                title="Proceed to Checkout"  
+                                onClick={() => navigate.push("/cart/checkout")}
+                            />
                         </div>
                     </ul>
                 </aside>

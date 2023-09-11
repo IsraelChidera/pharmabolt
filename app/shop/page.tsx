@@ -14,8 +14,7 @@ const page = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | any>("");
     const [allDrugProduct, setAllDrugProduct] = useState<Prod[]>([]);
-
-    // *[_type == 'product' && categories == 'Others']
+            
 
     const fetchData = async () => {
         try {
