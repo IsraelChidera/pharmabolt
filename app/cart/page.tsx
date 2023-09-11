@@ -23,7 +23,7 @@ const page = () => {
                 <div>
                     <section className='flex border-b pb-10 h-fit justify-between space-x-10'>
                         <div className='flex space-x-3'>
-                            <div>
+                            <div className='border rounded-md'>
                                 <Image style={{ width: "142px", height: "142px" }} src={product1} alt="product in cart" />
                             </div>
 
@@ -57,7 +57,7 @@ const page = () => {
 
                     <section className='mt-20 pb-10 border-b flex h-fit justify-between space-x-10'>
                         <div className='flex space-x-3'>
-                            <div>
+                            <div className='border rounded-md'>
                                 <Image style={{ width: "142px", height: "142px" }} src={product1} alt="product in cart" />
                             </div>
 
