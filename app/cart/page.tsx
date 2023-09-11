@@ -19,7 +19,7 @@ const page = () => {
                 </Link>
             </div>
 
-            <div className='mt-20 grid grid-cols-2 space-x-40'>
+            <div className='mt-20 md:grid grid-cols-2 md:space-x-40'>
                 <div>
                     <section className='flex border-b pb-10 h-fit justify-between space-x-10'>
                         <div className='flex space-x-3'>
@@ -48,7 +48,7 @@ const page = () => {
                         <div className=' text-sm flex flex-col justify-between'>
                             <p> NGN 7 950 </p>
 
-                            <div className='flex items-center text-primary'>
+                            <div className='flex items-center space-x-2 text-primary'>
                                 <Image src={deleteIcon} alt="delete icon" />
                                 <p className='text-xs'>Remove</p>
                             </div>
@@ -82,7 +82,7 @@ const page = () => {
                         <div className=' text-sm flex flex-col justify-between'>
                             <p> NGN 7 950 </p>
 
-                            <div className='flex items-center text-primary'>
+                            <div className='flex space-x-2 items-center text-primary'>
                                 <Image src={deleteIcon} alt="delete icon" />
                                 <p className='text-xs'>Remove</p>
                             </div>
@@ -90,7 +90,7 @@ const page = () => {
                     </section>
                 </div>
 
-                <aside>
+                <aside className='mt-20 md:mt-0 md:mb-0 mb-20'>
                     <ul>
                         <div className='flex justify-between'>
                             <p> Products </p>
