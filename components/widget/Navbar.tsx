@@ -67,7 +67,7 @@ const Navbar = () => {
                 <Image src={cart} alt='cart icon' className='relative z-20' />
                 <span style={{ fontSize: "9px", background: "#E20000" }} className=' p-0.5 z-10 rounded-md text-white absolute -top-3 -right-2'>3</span>
               </div>
-              <NavigationItem className="flex space-x-1" href="#">
+              <NavigationItem className="flex space-x-1" href="/cart">
                 <span>cart</span>
               </NavigationItem>
             </div>
@@ -83,7 +83,10 @@ const Navbar = () => {
           <Image src={search} alt="mobile search icon" style={{ width: "18px" }} />
 
           <div className='relative'>
-            <Image src={cart} alt='cart icon' className='relative z-20' style={{ width: "18px" }} />
+            <Link href="/cart">
+              <Image src={cart} alt='cart icon' className='relative z-20' style={{ width: "18px" }} />
+            </Link>
+
             <span style={{ fontSize: "6px", background: "#E20000" }} className=' p-1 z-10 rounded-md text-white absolute -top-3 -right-2'>3</span>
           </div>
 
