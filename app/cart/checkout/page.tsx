@@ -14,10 +14,10 @@ import Image from "next/image";
 
 const page = () => {
     return (
-        <section className='md:mt-0  mt-20 md:grid px-3 md:px-0 grid-cols-2 md:space-x-20 mx-auto md:w-5/6 md:py-8 py-10'>
-            <div>
+        <section className='md:mt-0 grid grid-cols-1 mt-10 md:grid px-3 md:px-0 md:grid-cols-2 md:space-x-20 mx-auto md:w-5/6 md:py-8 py-10'>
+            <div className='order-2'>
                 <div>
-                    <div>
+                    <div className='md:block hidden'>
                         <p style={{ color: "#999999" }} className='text-xs'> Home {">"} Cart {">"} Checkout </p>
                     </div>
 
@@ -156,7 +156,11 @@ const page = () => {
                 </div>
             </div>
 
-            <aside className='md:mt-0 mt-10 space-y-2'>
+            <aside className='order-1 pb-20 md:pb-0 md:mt-0 mt-10 space-y-2'>
+                <div className='block md:hidden'>
+                    <p style={{ color: "#999999" }} className='text-xs'> Home {">"} Cart {">"} Checkout </p>
+                </div>
+
                 <section className='flex pb-10 h-fit justify-between space-x-10'>
                     <div className='flex space-x-3'>
                         <div className='border rounded-md'>
@@ -167,9 +171,9 @@ const page = () => {
                             <div>
                                 <h3 className='text-sm'> Blood Test Strip </h3>
                                 <p className='text-xs font-semibold'> NGN 7 950 </p>
-                            </div>                            
+                            </div>
                         </div>
-                    </div>  
+                    </div>
 
 
                 </section>
@@ -184,9 +188,9 @@ const page = () => {
                             <div>
                                 <h3 className='text-sm'> Blood Test Strip </h3>
                                 <p className='text-xs font-semibold'> NGN 7 950 </p>
-                            </div>                            
+                            </div>
                         </div>
-                    </div>  
+                    </div>
 
 
                 </section>
