@@ -80,7 +80,7 @@ const Navbar = () => {
         <Link prefetch href="/"> <Image src={logo} alt="pharmabolt logo" style={{ width: "50px" }} /> </Link>
 
         <div className='flex items-center space-x-5'>
-          <Image src={search} alt="mobile search icon" style={{ width: "18px" }} />
+          <Image src={search} alt="mobile search icon" className='cursor-pointer' style={{ width: "18px" }} />
 
           <div className='relative'>
             <Link href="/cart">
@@ -90,7 +90,7 @@ const Navbar = () => {
             <span style={{ fontSize: "6px", background: "#E20000" }} className=' p-1 z-10 rounded-md text-white absolute -top-3 -right-2'>3</span>
           </div>
 
-          <Image onClick={openMobileMenu} src={open ? cancel : hamburger} alt="mobile hamburger icon" style={{ width: "18px" }} />
+          <Image onClick={openMobileMenu} className='cursor-pointer' src={open ? cancel : hamburger} alt="mobile hamburger icon" style={{ width: "18px" }} />
         </div>
       </div>
 
