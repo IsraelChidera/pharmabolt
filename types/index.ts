@@ -7,7 +7,7 @@ export interface CustomButtonProps {
 }
 
 export interface SecondaryButtonProps {
-  title: string;
+  title: any;
   className?: string;
   style?: any;
   onClick?: MouseEventHandler<HTMLButtonElement>;
