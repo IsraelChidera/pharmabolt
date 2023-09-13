@@ -10,13 +10,15 @@ import cancel from '../../public/assets/cancel.png';
 import call from '../../public/assets/call-icon.svg';
 import person from '../../public/assets/person-icon.svg';
 import cart from '../../public/assets/cart-icon.svg';
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import NavigationItem from '../elements/NavigationItem';
 import { CustomButton, SecondaryButton } from '..';
 //kally IT
 //www.kallysit.com
 
 const Navbar = () => {
+
+  const navigate = useRouter();
 
   const [open, setOpen] = useState(false);
 
@@ -42,9 +44,11 @@ const Navbar = () => {
               <p style={{ color: "#008BFF" }} className=''>+234 {"(0)"} 812 2675 439</p>
             </div>
 
-            <div className='flex justify-end items-center space-x-2'>
-              <Image src={person} alt="call icon" />
-              <p className=''>Login</p>
+            <div className='flex justify-end'>
+              <Link href="/login" className='inline-flex justify-end items-center space-x-2'>
+                <Image src={person} alt="call icon" />
+                <p className=''>Login</p>
+              </Link>
             </div>
 
           </div>
@@ -116,9 +120,9 @@ const Navbar = () => {
             </ul>
 
             <div className='mt-12 space-y-6 flex flex-col '>
-              <CustomButton title="Create account" className='px-16 py-3 text-sm' />
+              <CustomButton onClick={() => { navigate.push("/register"); setOpen(false) }} title="Create account" className='px-16 py-3 text-sm' />
 
-              <SecondaryButton title="Sign in" className='px-16 py-3 text-sm bg-white text-primary' style={{ border: "2px solid #008BFF" }} />
+              <SecondaryButton onClick={() => { navigate.push("/login"); setOpen(false) }} title="Sign in" className='px-16 py-3 text-sm bg-white text-primary' style={{ border: "2px solid #008BFF" }} />
             </div>
           </div>
 
