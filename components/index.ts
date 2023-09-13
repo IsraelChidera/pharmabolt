@@ -1,14 +1,14 @@
-import Hero from './widget/Hero';
+import Hero from './widget/LandingPage/Hero';
 import Footer from './widget/Footer';
 import Navbar from './widget/Navbar';
-import Products from './widget/Products';
-import BookConsultation from './widget/BookConsultation';
+import Products from './widget/LandingPage/Products';
+import BookConsultation from './widget/LandingPage/BookConsultation';
 
 import CustomButton from './elements/CustomButton';
 import SecondaryButton from './elements/SecondaryButton';
-import CreateAccount from './widget/CreateAccount';
-import Testimonials from './widget/Testimonials';
-import Newsletter from './widget/Newsletter';
+import CreateAccount from './widget/LandingPage/CreateAccount';
+import Testimonials from './widget/LandingPage/Testimonials';
+import Newsletter from './widget/LandingPage/Newsletter';
 
 export {
     Hero,

@@ -2,8 +2,8 @@
 
 import Image from 'next/image'
 import React from 'react'
-import { CustomButton } from '..';
-import book from '../../public/assets/book.png';
+import CustomButton  from '../../elements/CustomButton';
+import book from '../../../public/assets/book.png';
 
 const BookConsultation = () => {
 

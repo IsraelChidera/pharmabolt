@@ -2,6 +2,7 @@ import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonia
 import client from './lib/sanity';
 import { groq } from 'next-sanity';
 import { Product } from './lib/interface';
+import { useState } from 'react';
 
 
 const query = groq`*[_type == "product"]`;
@@ -11,8 +12,7 @@ export default async function Home() {
 
   const products = await client.fetch(query);  
 
-  // console.log("all p: ", products);  
-  
+  // console.log("all p: ", products);    
 
   return (
     <main className=''>      

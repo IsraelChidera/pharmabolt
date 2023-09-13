@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { CustomButton, SecondaryButton } from '..';
-import Product from './Product';
+import CustomButton  from '../../elements/CustomButton';
+import SecondaryButton  from '../../elements/SecondaryButton';
+import Product from '../../widget/Product';
 import { Product as Items } from '@/app/lib/interface';
 
 const Products = ({ products }: { products: Items[] }) => {

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { CustomButton } from '..';
+import CustomButton  from '../../elements/CustomButton';
 
 const Newsletter = () => {
 

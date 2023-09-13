@@ -33,7 +33,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         {/* <ProductContext> */}
           <Navbar />
-          {children}
+            {children}
           <Footer />
         {/* </ProductContext> */}
       </body>

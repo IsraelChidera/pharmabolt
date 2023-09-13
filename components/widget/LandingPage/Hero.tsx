@@ -2,14 +2,17 @@
 
 import Image from 'next/image';
 import React from 'react';
-import hero from '../../public/assets/hero-image.png';
-import line from '../../public/assets/line.svg';
-import CustomButton from '../elements/CustomButton';
+import hero from '../../../public/assets/hero-image.png';
+import line from '../../../public/assets/line.svg';
+import CustomButton from '../../elements/CustomButton';
+import { useRouter } from 'next/navigation';
 
 const Hero = () => {
 
-    const handleClick = () => {
+    const navigate = useRouter();
 
+    const handleClick = () => {
+        navigate.push('/shop');
     }
 
     return (

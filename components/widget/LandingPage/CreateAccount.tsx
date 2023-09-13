@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
-import { CustomButton } from '..';
-import book from '../../public/assets/sign-up.png';
-import circle from '../../public/assets/circle2.png';
-import circle2 from '../../public/assets/circle.png';
+import CustomButton  from '../../elements/CustomButton';
+import book from '../../../public/assets/sign-up.png';
+import circle from '../../../public/assets/circle2.png';
+import circle2 from '../../../public/assets/circle.png';
 
 const CreateAccount = () => {
     return (
