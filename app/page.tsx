@@ -2,7 +2,8 @@ import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonia
 import client from './lib/sanity';
 import { groq } from 'next-sanity';
 import { Product } from './lib/interface';
-import { useState } from 'react';
+import LandingPageLayout from '@/components/widget/LandingPage/LandingPageLayout';
+
 
 
 const query = groq`*[_type == "product"]`;
@@ -15,13 +16,8 @@ export default async function Home() {
   // console.log("all p: ", products);    
 
   return (
-    <main className=''>      
-      <Hero />
-      <Products products={products} />
-      <BookConsultation />
-      <CreateAccount />
-      <Testimonials />
-      <Newsletter />
+    <main className=''>            
+      <LandingPageLayout/>
     </main>
   )
 }
