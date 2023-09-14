@@ -1,3 +1,6 @@
+'use client'
+
+
 import React from 'react';
 import Link from 'next/link';
 import Box from '@mui/material/Box';
@@ -5,8 +8,43 @@ import TextField from '@mui/material/TextField';
 import { CustomButton, SecondaryButton } from '@/components';
 import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
+import { Field, Form, Formik } from 'formik';
+import { FormLoginErrors, FormLoginValues } from '@/types';
+
 
 const page = () => {
+
+    const initialValues: FormLoginValues = {
+        email: "",
+        password: "",
+    }
+
+    const validateForm = (values: FormLoginValues) => {
+        const errors: FormLoginErrors = {}
+
+        if (!values.email) {
+            errors.email = "Email is required";
+        } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        ) {
+            errors.email = "Invalid email address";
+        }
+
+        if (!values.password) {
+            errors.password = "Password number is required";
+        } else if (values.password.length <= 8) {
+            errors.password = "Password length must be more than 7"
+        }
+
+        return errors;
+    }
+
+    const onLogin = (values: any) => {
+        // e.preventDefault();
+        console.log("values", values);
+        alert("d");
+    }
+
     return (
         <div className='mt-28 mb-20 flex items-center h-fit justify-center px-3 md:px-0'>
             <section className=' px-3 py-6 h-fit mx-auto w-full md:w-1/2 rectangle'>
@@ -14,49 +52,76 @@ const page = () => {
 
                 <p className='text-sm mt-2'> Don't have an account? <Link href="/register" className='text-primary'> Create an account instead </Link> </p>
 
-                <Box
-                    component="form"
-                    className='space-y-6 mt-6'
-                    noValidate
-                    autoComplete="off"
+                <Formik
+                    initialValues={initialValues}
+                    validate={validateForm}
+                    onSubmit={(values) => onLogin(values)}
                 >
-                    <div>
-                        <TextField
-                            required
-                            type="email"
-                            id="outlined-required"
-                            label={<span className='text-sm'>Email address</span>}
-                            className='w-full'
-                        />
-                    </div>
+                    {
+                        (
+                            { values, errors, touched, handleChange, handleSubmit }:
+                                {
+                                    values: FormLoginValues, errors: FormLoginErrors,
+                                    touched: any, handleChange: any, handleSubmit: any
+                                }
+                        ) => (
+                            <Form>
+                                <div
+                                    className='space-y-6 mt-6'
 
-                    <div>
-                        <TextField
-                            required
-                            id="outlined-password-input"
-                            label="Password"
-                            type="password"
-                            className='w-full'
-                        />
-                    </div>
-                </Box>
+                                >
+                                    <div>
+                                        <TextField
+                                            required
+                                            type="email"
+                                            id="outlined-required email"
+                                            name="email"
+                                            value={values.email}
+                                            label="Email address"
+                                            className={`w-full text-black ${errors.email && 'border border-red-700'}`}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
 
-                <CustomButton title="Sign in" className='mt-10 py-3 w-full' />
-                <SecondaryButton
-                    title={
-                        <div className='text-primary flex justify-center items-center'>
-                            <div className='flex space-x-2'>
-                                <Image
-                                    src={google}
-                                    alt="google icon"
-                                    style={{ width: "20px" }}
+                                    <div>
+                                        <TextField
+                                            required
+                                            id="outlined-password-input password"
+                                            name="password"
+                                            value={values.password}
+                                            label="Password"
+                                            type="password"
+                                            className={`w-full ${errors.password && touched.password && errors.password && 'border border-red-700'}`}
+                                            onChange={handleChange}
+                                        />
+
+                                        <p className='text-xs text-red-700'>
+                                            {errors.password && touched.password && errors.password}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <CustomButton type="submit" title="Sign in" className='mt-10 py-3 w-full' />
+                                <SecondaryButton
+                                    title={
+                                        <div className='text-primary flex justify-center items-center'>
+                                            <div className='flex space-x-2'>
+                                                <Image
+                                                    src={google}
+                                                    alt="google icon"
+                                                    style={{ width: "20px" }}
+                                                />
+                                                <span>Continue with Google</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    className='mt-4 border py-3 w-full'
                                 />
-                                <span>Continue with Google</span>
-                            </div>
-                        </div>
+                            </Form>
+                        )
                     }
-                    className='mt-4 border py-3 w-full'
-                />
+                </Formik>
+
             </section>
         </div>
     )

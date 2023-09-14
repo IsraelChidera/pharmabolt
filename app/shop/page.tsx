@@ -67,10 +67,10 @@ const page = () => {
                             </li> */}
 
                             {
-                                category.map((item, index) => (
+                                category.map((item) => (
 
                                     <li
-                                        key={index}
+                                        key={item}
                                         onClick={() => handleCategoryChange(item)}
                                         className='cursor-pointer'
                                     >
@@ -107,9 +107,9 @@ const page = () => {
                                 open &&
                                 <div className='rectangle'>
                                     {
-                                        category.map((item, index) => (
+                                        category.map((item) => (
 
-                                            <div key={index} className='flex items-center justify-center text-center '>
+                                            <div key={item} className='flex items-center justify-center text-center '>
 
                                                 <li
                                                     onClick={() => {
