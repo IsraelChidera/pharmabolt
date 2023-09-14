@@ -39,10 +39,8 @@ const page = () => {
         return errors;
     }
 
-    const onLogin = (values: any) => {
-        // e.preventDefault();
-        console.log("values", values);
-        alert("d");
+    const onLogin = (values: any) => {        
+        console.log("values", values);       
     }
 
     return (

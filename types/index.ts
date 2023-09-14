@@ -20,9 +20,7 @@ export interface FormLoginValues {
 }
 
 export interface FormSignupValues{
-  firstName: string;
-  lastName: string;
-  phone: string;  
+  fullName: string;  
   email: string;
   password: string;
   confirmPassword: string;
@@ -34,9 +32,7 @@ export interface FormLoginErrors {
 }
 
 export interface FormSignupErrors {
-  firstName?: string;
-  lastName?: string;
-  phone?: string;  
+  fullName?: string;   
   email?: string;
   password?: string;
   confirmPassword?: string;
