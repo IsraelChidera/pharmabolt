@@ -11,9 +11,8 @@ import Image from "next/image";
 import { Field, Form, Formik } from 'formik';
 import { FormLoginErrors, FormLoginValues } from '@/types';
 
-
 const page = () => {
-
+      
     const initialValues: FormLoginValues = {
         email: "",
         password: "",
