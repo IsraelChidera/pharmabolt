@@ -2,13 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { CustomButton, SecondaryButton } from '@/components';
 import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
 import { FormSignupErrors, FormSignupValues } from '@/types';
 import { Formik, Form } from 'formik';
+import {auth} from '../../firebase';
+import { createUserWithEmailAndPassword, updateProfile, User as U} from 'firebase/auth';
 
 const page = () => {
 
@@ -50,8 +51,27 @@ const page = () => {
         return errors;
     }
 
-    const onSignup = (values: any) => {
-        console.log("values: ", values);        
+    const onSignup = async (values: any) => {
+        await createUserWithEmailAndPassword(auth, values.email, values.password)      
+        .then((userCredential) => {
+            const user = userCredential.user;
+
+            console.log("Success")
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        })
+
+        const currentUsers: any = auth.currentUser;
+
+        await updateProfile(currentUsers , {
+            displayName: values.fullName,
+
+        }).then(()=> {
+            console.log("success updtae")
+        }).catch((error) => {
+        })
     }
 
 
