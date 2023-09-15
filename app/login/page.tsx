@@ -9,12 +9,15 @@ import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
 import { Field, Form, Formik } from 'formik';
 import { FormLoginErrors, FormLoginValues } from '@/types';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '@/firebase';
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth, provider } from '@/firebase';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
+
+    const navigate = useRouter();
 
     const initialValues: FormLoginValues = {
         email: "",
@@ -57,6 +60,35 @@ const page = () => {
             });
     }
 
+    const handleLoginWithGoogle = async () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // IdP data available using getAdditionalUserInfo(result)
+                console.log("success");
+                navigate.push("/")
+
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMsg(errorMessage);
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                console.log("success");
+                console.log(credential);
+
+                // ...
+            });
+    }
+
     return (
         <div className='mt-28 mb-20 flex items-center h-fit justify-center px-3 md:px-0'>
             <section className=' px-3 py-6 h-fit mx-auto w-full md:w-1/2 rectangle'>
@@ -77,48 +109,52 @@ const page = () => {
                                     touched: any, handleChange: any, handleSubmit: any
                                 }
                         ) => (
-                            <Form>
+                            <div>
+                                <Form>
 
-                                <p className='my-4 text-red-700 text-xs'>
-                                    {errorMsg}
-                                </p>
+                                    <p className='my-4 text-red-700 text-xs'>
+                                        {errorMsg}
+                                    </p>
 
-                                <div
-                                    className='space-y-6 mt-6'
+                                    <div
+                                        className='space-y-6 mt-6'
 
-                                >
-                                    <div>
-                                        <TextField
-                                            required
-                                            type="email"
-                                            id="outlined-required email"
-                                            name="email"
-                                            value={values.email}
-                                            label="Email address"
-                                            className={`w-full text-black ${errors.email && 'border border-red-700'}`}
-                                            onChange={handleChange}
-                                        />
+                                    >
+                                        <div>
+                                            <TextField
+                                                required
+                                                type="email"
+                                                id="outlined-required email"
+                                                name="email"
+                                                value={values.email}
+                                                label="Email address"
+                                                className={`w-full text-black ${errors.email && 'border border-red-700'}`}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <TextField
+                                                required
+                                                id="outlined-password-input password"
+                                                name="password"
+                                                value={values.password}
+                                                label="Password"
+                                                type="password"
+                                                className={`w-full ${errors.password && touched.password && errors.password && 'border border-red-700'}`}
+                                                onChange={handleChange}
+                                            />
+
+                                            <p className='text-xs text-red-700'>
+                                                {errors.password && touched.password && errors.password}
+                                            </p>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <TextField
-                                            required
-                                            id="outlined-password-input password"
-                                            name="password"
-                                            value={values.password}
-                                            label="Password"
-                                            type="password"
-                                            className={`w-full ${errors.password && touched.password && errors.password && 'border border-red-700'}`}
-                                            onChange={handleChange}
-                                        />
+                                    <CustomButton type="submit" title="Sign in" className=' mt-10 py-3 w-full' />
 
-                                        <p className='text-xs text-red-700'>
-                                            {errors.password && touched.password && errors.password}
-                                        </p>
-                                    </div>
-                                </div>
+                                </Form>
 
-                                <CustomButton type="submit" title="Sign in" className=' mt-10 py-3 w-full' />
                                 <SecondaryButton
                                     title={
                                         <div className='text-primary flex justify-center items-center'>
@@ -132,9 +168,10 @@ const page = () => {
                                             </div>
                                         </div>
                                     }
+                                    onClick={handleLoginWithGoogle}
                                     className='mt-4 border py-3 w-full'
                                 />
-                            </Form>
+                            </div>
                         )
                     }
                 </Formik>

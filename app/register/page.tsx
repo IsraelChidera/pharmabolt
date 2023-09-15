@@ -8,14 +8,17 @@ import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
 import { FormSignupErrors, FormSignupValues } from '@/types';
 import { Formik, Form } from 'formik';
-import { auth } from '../../firebase';
-import { createUserWithEmailAndPassword, updateProfile, User as U } from 'firebase/auth';
+import { auth, provider } from '../../firebase';
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
 
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const [success, setSuccess] = useState(false);
+
+    const navigate = useRouter();
 
     const initialValues = {
         fullName: "",
@@ -68,7 +71,7 @@ const page = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                setErrorMsg(errorMessage);               
+                setErrorMsg(errorMessage);
             })
 
         const currentUsers: any = auth.currentUser;
@@ -84,7 +87,38 @@ const page = () => {
                 setLoading(false);
             })
         }
-    }   
+    }
+
+    
+
+    const handleLoginWithGoogle = async () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+                // The signed-in user info.
+                const user = result.user;
+                // IdP data available using getAdditionalUserInfo(result)
+                console.log("success");
+                navigate.push("/")
+                
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMsg(errorMessage);
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                console.log("success");
+                console.log(credential);
+                
+                // ...
+            });
+    }
 
     return (
         <div className='mt-28 mb-20 flex items-center h-fit justify-center px-3 md:px-0'>
@@ -105,87 +139,91 @@ const page = () => {
                                 handleChange: any, handleSubmit: any, isSubmitting: boolean
                             }
                         ) => (
-                            <Form>
+                            <div>
+                                <Form>
 
-                                <p className='my-4 text-red-700 text-xs'>
-                                    {errorMsg}
-                                </p>
+                                    <p className='my-4 text-red-700 text-xs'>
+                                        {errorMsg}
+                                    </p>
 
-                                <div
-                                    className='space-y-6 mt-6'
-                                >
-                                    <div>
-                                        <TextField
-                                            required
-                                            type="text"
-                                            id="outlined-required fullName"
-                                            name="fullName"
-                                            onChange={handleChange}
-                                            value={values.fullName}
-                                            label={<span className='text-sm'>Full name </span>}
-                                            className='w-full'
-                                        />
-                                        <p className='text-xs text-red-700'>
-                                            {errors.fullName && touched.fullName && errors.fullName}
-                                        </p>
+                                    <div
+                                        className='space-y-6 mt-6'
+                                    >
+                                        <div>
+                                            <TextField
+                                                required
+                                                type="text"
+                                                id="outlined-required fullName"
+                                                name="fullName"
+                                                onChange={handleChange}
+                                                value={values.fullName}
+                                                label={<span className='text-sm'>Full name </span>}
+                                                className='w-full'
+                                            />
+                                            <p className='text-xs text-red-700'>
+                                                {errors.fullName && touched.fullName && errors.fullName}
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <TextField
+                                                required
+                                                type="email"
+                                                id="outlined-required email"
+                                                name="email"
+                                                onChange={handleChange}
+                                                value={values.email}
+                                                label={<span className='text-sm'>Email address</span>}
+                                                className='w-full'
+                                            />
+                                            <p className='text-xs text-red-700'>
+                                                {errors.email && touched.email && errors.email}
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <TextField
+                                                required
+                                                id="outlined-password-input password"
+                                                name="password"
+                                                onChange={handleChange}
+                                                value={values.password}
+                                                label="Password"
+                                                type="password"
+                                                className='w-full'
+                                            />
+
+                                            <p className='text-xs text-red-700'>
+                                                {errors.password && touched.password && errors.password}
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <TextField
+                                                required
+                                                id="outlined-password-input confirmPassword"
+                                                name="confirmPassword"
+                                                onChange={handleChange}
+                                                value={values.confirmPassword}
+                                                label="Confirm password"
+                                                type="password"
+                                                className='w-full'
+                                            />
+
+                                            <p className='text-xs text-red-700'>
+                                                {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
+                                            </p>
+                                        </div>
                                     </div>
 
-                                    <div>
-                                        <TextField
-                                            required
-                                            type="email"
-                                            id="outlined-required email"
-                                            name="email"
-                                            onChange={handleChange}
-                                            value={values.email}
-                                            label={<span className='text-sm'>Email address</span>}
-                                            className='w-full'
-                                        />
-                                        <p className='text-xs text-red-700'>
-                                            {errors.email && touched.email && errors.email}
-                                        </p>
-                                    </div>
+                                    <CustomButton
+                                        type="submit"
+                                        title="Create account"
+                                        className='disabled:opacity-65 mt-10 py-3 w-full'
+                                    />
 
-                                    <div>
-                                        <TextField
-                                            required
-                                            id="outlined-password-input password"
-                                            name="password"
-                                            onChange={handleChange}
-                                            value={values.password}
-                                            label="Password"
-                                            type="password"
-                                            className='w-full'
-                                        />
+                                </Form>
 
-                                        <p className='text-xs text-red-700'>
-                                            {errors.password && touched.password && errors.password}
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <TextField
-                                            required
-                                            id="outlined-password-input confirmPassword"
-                                            name="confirmPassword"
-                                            onChange={handleChange}
-                                            value={values.confirmPassword}
-                                            label="Confirm password"
-                                            type="password"
-                                            className='w-full'
-                                        />
-
-                                        <p className='text-xs text-red-700'>
-                                            {errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <CustomButton                                    
-                                    type="submit"
-                                    title="Create account"
-                                    className='disabled:opacity-65 mt-10 py-3 w-full'
-                                />
                                 <SecondaryButton
                                     title={
                                         <div className='text-primary flex justify-center items-center'>
@@ -199,9 +237,10 @@ const page = () => {
                                             </div>
                                         </div>
                                     }
+                                    onClick={handleLoginWithGoogle}
                                     className='mt-4 border py-3 w-full'
                                 />
-                            </Form>
+                            </div>
                         )
                     }
                 </Formik>
