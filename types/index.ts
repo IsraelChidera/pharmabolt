@@ -5,6 +5,7 @@ export interface CustomButtonProps {
   className?: string;
   type?: any;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
 }
 
 export interface SecondaryButtonProps {

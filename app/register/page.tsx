@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import TextField from '@mui/material/TextField';
 import { CustomButton, SecondaryButton } from '@/components';
@@ -8,10 +8,14 @@ import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
 import { FormSignupErrors, FormSignupValues } from '@/types';
 import { Formik, Form } from 'formik';
-import {auth} from '../../firebase';
-import { createUserWithEmailAndPassword, updateProfile, User as U} from 'firebase/auth';
+import { auth } from '../../firebase';
+import { createUserWithEmailAndPassword, updateProfile, User as U } from 'firebase/auth';
 
 const page = () => {
+
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+    const [success, setSuccess] = useState(false);
 
     const initialValues = {
         fullName: "",
@@ -29,7 +33,7 @@ const page = () => {
             errors.fullName = 'Must be 3 characters or more';
         }
 
-   
+
         if (!values.email) {
             errors.email = "Email is required";
         } else if (
@@ -52,28 +56,35 @@ const page = () => {
     }
 
     const onSignup = async (values: any) => {
-        await createUserWithEmailAndPassword(auth, values.email, values.password)      
-        .then((userCredential) => {
-            const user = userCredential.user;
+        setLoading(true);
+        await createUserWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+                const user = userCredential.user;
 
-            console.log("Success")
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        })
+                console.log("Success")
+                setLoading(false);
+                setSuccess(true);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMsg(errorMessage);               
+            })
 
         const currentUsers: any = auth.currentUser;
 
-        await updateProfile(currentUsers , {
-            displayName: values.fullName,
+        if (success) {
+            await updateProfile(currentUsers, {
+                displayName: values.fullName,
 
-        }).then(()=> {
-            console.log("success updtae")
-        }).catch((error) => {
-        })
-    }
-
+            }).then(() => {
+                console.log("success updtae")
+                setLoading(false);
+            }).catch((error) => {
+                setLoading(false);
+            })
+        }
+    }   
 
     return (
         <div className='mt-28 mb-20 flex items-center h-fit justify-center px-3 md:px-0'>
@@ -95,6 +106,11 @@ const page = () => {
                             }
                         ) => (
                             <Form>
+
+                                <p className='my-4 text-red-700 text-xs'>
+                                    {errorMsg}
+                                </p>
+
                                 <div
                                     className='space-y-6 mt-6'
                                 >
@@ -165,7 +181,11 @@ const page = () => {
                                     </div>
                                 </div>
 
-                                <CustomButton type="submit" title="Create account" className='mt-10 py-3 w-full' />
+                                <CustomButton                                    
+                                    type="submit"
+                                    title="Create account"
+                                    className='disabled:opacity-65 mt-10 py-3 w-full'
+                                />
                                 <SecondaryButton
                                     title={
                                         <div className='text-primary flex justify-center items-center'>

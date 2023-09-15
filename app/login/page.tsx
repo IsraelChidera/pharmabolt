@@ -1,18 +1,21 @@
 'use client'
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { CustomButton, SecondaryButton } from '@/components';
 import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
 import { Field, Form, Formik } from 'formik';
 import { FormLoginErrors, FormLoginValues } from '@/types';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '@/firebase';
 
 const page = () => {
-      
+    const [loading, setLoading] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+
     const initialValues: FormLoginValues = {
         email: "",
         password: "",
@@ -38,8 +41,20 @@ const page = () => {
         return errors;
     }
 
-    const onLogin = (values: any) => {        
-        console.log("values", values);       
+    const onLogin = async (values: any) => {
+        setLoading(true);
+        await signInWithEmailAndPassword(auth, values.email, values.password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log("successful login");
+
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMsg(errorMessage);
+            });
     }
 
     return (
@@ -63,6 +78,11 @@ const page = () => {
                                 }
                         ) => (
                             <Form>
+
+                                <p className='my-4 text-red-700 text-xs'>
+                                    {errorMsg}
+                                </p>
+
                                 <div
                                     className='space-y-6 mt-6'
 
@@ -98,7 +118,7 @@ const page = () => {
                                     </div>
                                 </div>
 
-                                <CustomButton type="submit" title="Sign in" className='mt-10 py-3 w-full' />
+                                <CustomButton type="submit" title="Sign in" className=' mt-10 py-3 w-full' />
                                 <SecondaryButton
                                     title={
                                         <div className='text-primary flex justify-center items-center'>
