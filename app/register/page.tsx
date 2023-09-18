@@ -9,7 +9,7 @@ import Image from "next/image";
 import { FormSignupErrors, FormSignupValues } from '@/types';
 import { Formik, Form } from 'formik';
 import { auth, provider } from '../../firebase';
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 const page = () => {
@@ -89,7 +89,7 @@ const page = () => {
         }
     }
 
-    
+
 
     const handleLoginWithGoogle = async () => {
         signInWithPopup(auth, provider)
@@ -102,7 +102,7 @@ const page = () => {
                 // IdP data available using getAdditionalUserInfo(result)
                 console.log("success");
                 navigate.push("/")
-                
+
                 // ...
             }).catch((error) => {
                 // Handle Errors here.
@@ -115,9 +115,17 @@ const page = () => {
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 console.log("success");
                 console.log(credential);
-                
+
                 // ...
             });
+    }
+
+    const handleLoginWithGoogleRedirect = async () => {
+        try {
+            await signInWithRedirect(auth, provider);
+        } catch (error: any) {
+            setErrorMsg(error.message);
+        }
     }
 
     return (
@@ -238,7 +246,24 @@ const page = () => {
                                         </div>
                                     }
                                     onClick={handleLoginWithGoogle}
-                                    className='mt-4 border py-3 w-full'
+                                    className='hidden md:block mt-4 border py-3 w-full'
+                                />
+
+                                <SecondaryButton
+                                    title={
+                                        <div className='text-primary flex justify-center items-center'>
+                                            <div className='flex space-x-2'>
+                                                <Image
+                                                    src={google}
+                                                    alt="google icon"
+                                                    style={{ width: "20px" }}
+                                                />
+                                                <span>Sign in with Google</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    onClick={handleLoginWithGoogleRedirect}
+                                    className='md:hidden block mt-4 border py-3 w-full'
                                 />
                             </div>
                         )

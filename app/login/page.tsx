@@ -9,7 +9,7 @@ import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
 import { Field, Form, Formik } from 'formik';
 import { FormLoginErrors, FormLoginValues } from '@/types';
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { auth, provider } from '@/firebase';
 import { useRouter } from 'next/navigation';
 
@@ -87,6 +87,14 @@ const page = () => {
 
                 // ...
             });
+    }
+
+    const handleLoginWithGoogleRedirect = async () => {
+        try {
+            await signInWithRedirect(auth, provider);
+        } catch (error: any) {
+            setErrorMsg(error.message);
+        }
     }
 
     return (
@@ -169,7 +177,24 @@ const page = () => {
                                         </div>
                                     }
                                     onClick={handleLoginWithGoogle}
-                                    className='mt-4 border py-3 w-full'
+                                    className='hidden md:block mt-4 border py-3 w-full'
+                                />
+
+                                <SecondaryButton
+                                    title={
+                                        <div className='text-primary flex justify-center items-center'>
+                                            <div className='flex space-x-2'>
+                                                <Image
+                                                    src={google}
+                                                    alt="google icon"
+                                                    style={{ width: "20px" }}
+                                                />
+                                                <span>Sign in with Google</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    onClick={handleLoginWithGoogleRedirect}
+                                    className='md:hidden block mt-4 border py-3 w-full'
                                 />
                             </div>
                         )
