@@ -44,14 +44,15 @@ export default {
       type: 'string',
     },
     {
-        name: 'popularproducts',
-        title: 'PopularProducts',
-        type: 'boolean'
+      name: 'popularproducts',
+      title: 'PopularProducts',
+      type: 'boolean',
     },
     {
-        name: 'categories',
-        title: 'Categories',
-        type: 'string'
-    }
+      name: 'categories',
+      title: 'Categories',
+      type: 'string',
+    },
+    
   ],
 }
