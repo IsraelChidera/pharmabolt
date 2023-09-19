@@ -1,11 +1,14 @@
+'use client'
+
 import React from 'react'
 import { CustomButton } from '..'
 import { Product } from '@/app/lib/interface';
 import Link from 'next/link'
 import { urlfor } from '@/app/lib/sanity';
+import { useShoppingCart } from '@/utilities/CartContext';
 // import { useRouter } from 'next/navigation';
 
-const Product = ({ name, image, price, slug, description, popularproducts, categories }: Product) => {
+const Product = ({ idx, name, image, price, slug, description, popularproducts, categories }: Product) => {
 
     const truncatedLongName = (name: string, maxLengthOfProductName: number) => {
         if (name.length > maxLengthOfProductName) {
@@ -15,17 +18,12 @@ const Product = ({ name, image, price, slug, description, popularproducts, categ
         }
 
         return name;
-    }
+    }  
 
-    const quantity: number = 0;
+    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart();
 
-    const handleQuantityIncrease = () => {
+    const quantity = getItemQuantity(idx);    
 
-    }
-
-    const handleQuantityDecrease = () => {
-
-    }
 
     return (
         <section className='flex justify-center'>
@@ -51,15 +49,16 @@ const Product = ({ name, image, price, slug, description, popularproducts, categ
                         <CustomButton
                             title="Add to cart"
                             className='w-full py-2 text-xs mt-4'
+                            onClick={() => increaseCartQuantity(idx)}
                         />
                         :
                         <div className='md:text-lg flex space-x-4 items-center mt-6 md:mt-4'>
                             <p className='text-xs'>Quantity</p>
                             <div className='flex items-center space-x-10'>
-                                <button onClick={handleQuantityIncrease} className='font-bold bg-blue-700 border 
+                                <button onClick={() => decreaseCartQuantity(idx)} className='font-bold bg-blue-700 border 
                                 px-2 text-white rounded-md'> - </button>
                                 <p> {quantity} </p>
-                                <button onClick={handleQuantityDecrease} className='font-bold bg-blue-700 border 
+                                <button onClick={() => increaseCartQuantity(idx)} className='font-bold bg-blue-700 border 
                                 px-2 text-white rounded-md'> + </button>
                             </div>
                         </div>

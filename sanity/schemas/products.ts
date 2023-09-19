@@ -20,6 +20,11 @@ export default {
       },
     },
     {
+      name: 'idx',
+      title: 'Idx',
+      type: 'number',
+    },
+    {
       name: 'name',
       title: 'Name',
       type: 'string',
@@ -53,6 +58,5 @@ export default {
       title: 'Categories',
       type: 'string',
     },
-    
   ],
 }

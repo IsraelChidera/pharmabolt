@@ -1,11 +1,23 @@
 export interface Product {
+  idx: number;
   image: any;
   name: string;
   slug: any;
   price: number;
-  description: string;  
+  description: string;
   categories: string;
   popularproducts: boolean;
+}
+
+export type ProductType = {
+  idx: number,
+  image: any,
+  name: string,
+  slug: any,
+  price: number,
+  description: string,
+  categories: string,
+  popularproducts: boolean,
 }
 
 export interface PageProps {
@@ -15,7 +27,7 @@ export interface PageProps {
 }
 
 export interface ProductContextType {
-    products: Product[];
-    loading: Boolean;
-    error: string | null;
+  products: Product[];
+  loading: Boolean;
+  error: string | null;
 }

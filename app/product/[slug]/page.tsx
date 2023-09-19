@@ -53,6 +53,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
           {
             allProducts.slice(0,4).map((item) => (
               <Product
+                idx={item.idx}
                 key={item.slug}
                 slug={item.slug}
                 name={item.name}

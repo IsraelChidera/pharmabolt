@@ -2,14 +2,14 @@
 
 import Image from 'next/image';
 import React from 'react';
-import CustomButton  from '../../elements/CustomButton';
-import SecondaryButton  from '../../elements/SecondaryButton';
+import CustomButton from '../../elements/CustomButton';
+import SecondaryButton from '../../elements/SecondaryButton';
 import Product from '../../widget/Product';
-import { Product as Items } from '@/app/lib/interface';
+import { ProductType } from '@/app/lib/interface';
 
-const Products = ({ products }: { products: Items[] }) => {
-       
-    
+const Products = ({ products }: { products: ProductType[] }) => {
+
+
     return (
         <section className='md:mt-40 mt-20 mx-3 md:mx-auto md:w-5/6'>
             <h2 className='md:text-2xl text-lg font-bold text-center'>
@@ -20,19 +20,16 @@ const Products = ({ products }: { products: Items[] }) => {
 
             <div className='pt-6 mt-4 md:mt-10 grid-container '>
                 {
-                    products.map((item) => (
-                        <Product                             
-                            key={item.slug}                             
-                            slug={item.slug}
-                            name={item.name} 
-                            image={item.image}                                
-                            price={item.price}
-                            description={item.description}  
-                            popularproducts={item.popularproducts}                       
-                            categories={item.categories}
-                        />
+                    products.map(item => (
+                        <>
+                            <div key={item.idx}>
+                                <Product
+                                    {...item}
+                                />
+                            </div>
+                        </>
                     ))
-                }                                           
+                }
 
             </div>
 

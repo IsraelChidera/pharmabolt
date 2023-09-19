@@ -1,6 +1,9 @@
 'use client'
 
-import React, { createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
+type ShoppingCartProviderProps = {
+    children: ReactNode
+}
 
 type CartItems = {
     id: number,
@@ -21,7 +24,7 @@ export function useShoppingCart() {
     return useContext(CartContext);
 }
 
-export function ShoppingCartProvider({ children }: { children: React.ReactNode }) {
+export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
 
     const getItemQuantity = (id: number) => {

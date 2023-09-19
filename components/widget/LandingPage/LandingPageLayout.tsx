@@ -10,15 +10,18 @@ import { Product } from '../../../app/lib/interface';
 const query = groq`*[_type == "product"]`;
 
 const LandingPageLayout = async () => {
-    const products = await client.fetch(query);  
+    const products: Product[] = await client.fetch(query);
+
+    console.log("asd: ", products);
+
     return (
-        <div>            
+        <div>
             <Hero />
             <Products products={products} />
             <BookConsultation />
             <CreateAccount />
             <Testimonials />
-            <Newsletter />            
+            <Newsletter />
         </div>
     )
 }
