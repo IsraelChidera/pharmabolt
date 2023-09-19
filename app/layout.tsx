@@ -4,6 +4,7 @@ import { Footer, Navbar } from '@/components'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ShoppingCartProvider } from '@/utilities/CartContext'
 
 
 
@@ -26,11 +27,13 @@ export default async function RootLayout({
     <html lang="en">
 
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <ShoppingCartProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ShoppingCartProvider>
       </body>
-      
+
     </html>
   )
 }
