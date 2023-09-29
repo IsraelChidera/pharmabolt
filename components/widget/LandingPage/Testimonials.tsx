@@ -14,7 +14,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 
-const images = [
+const testimonials = [
     {
         image: testimonialImage,
         name: 'Mrs. Chiamaka Edozie',
@@ -26,19 +26,27 @@ const images = [
     {
         image: testimonialImage,
         name: 'Mr Livinus Umeh',
-        testimonial: 'Top notch service. Customer care was great too',
+        testimonial: `Pharmabolt has been a lifesaver for my family. 
+        Their team is responsive, and the medications are always 
+        in perfect condition. I trust them for all our health 
+        requirements`,
         posted: '1 year ago'
     },
     {
         image: testimonialImage,
         name: 'Miss Joyce Gift',
-        testimonial: 'Pharmabolt has all the drugs. Awesome move',
+        testimonial: `Exceptional service! I received my order promptly, 
+        and the quality of the products exceeded my expectations. 
+        Pharmabolt is my go-to choice for healthcare needs.`,
         posted: '4 months ago'
     },
     {
         image: testimonialImage,
-        name: 'Mr Frank',
-        testimonial: 'Great team. Fast delivery. Good pricing',
+        name: 'Dr. Frank Roberts',
+        testimonial: `As a healthcare professional, I demand 
+        the best for my patients. Pharmabolt consistently 
+        delivers top-notch service. Their attention to detail 
+        in packaging and quality assurance is commendable.`,
         posted: '1 month ago'
     }
 ]
@@ -86,60 +94,35 @@ const Testimonials = () => {
                             spaceBetween={30}
                             slidesPerView={1}
                         >
-
-                            <SwiperSlide >
-                                <div className=' border-4 p-1 rounded-2xl border-dashed '>
-                                    <div
-                                        style={{ background: "#008bff" }}
-                                        className="text-white py-10 px-8 flex 
+                            {
+                                testimonials.map((item) => (
+                                    <SwiperSlide key={item.name}>
+                                        <div className=' border-4 p-1 rounded-2xl border-dashed '>
+                                            <div
+                                                style={{ background: "#008bff" }}
+                                                className="text-white py-10 px-8 flex 
                                             justify-between items-center space-x-10 rounded-2xl"
-                                    >
-                                        <div>
-                                            <Image src={testimonialImage} alt="Profile of testimonial" />
-                                        </div>
+                                            >
+                                                <div>
+                                                    <Image src={item.image} alt="Profile of testimonial" />
+                                                </div>
 
-                                        <div>
-                                            <div className='flex justify-between items-end'>
-                                                <h3 className='text-2xl font-bold'> Mrs. Chiamaka Edozie </h3>
-                                                <p className='text-xs'> 2 days ago </p>
+                                                <div>
+                                                    <div className='flex justify-between items-end'>
+                                                        <h3 className='text-2xl font-bold'> {item.name} </h3>
+                                                        <p className='text-xs'> {item.posted} </p>
+                                                    </div>
+
+                                                    <p className='pt-2 text-xl'>
+                                                        {item.testimonial}
+                                                    </p>
+                                                </div>
                                             </div>
-
-                                            <p className='pt-2 text-xl'>
-                                                I couldn't be happier with the service delivery.
-                                                Got my son's medication and everything was
-                                                well packaged and sealed.
-                                            </p>
                                         </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
+                                    </SwiperSlide>
 
-                            <SwiperSlide >
-                                <div className=' border-4 p-1 rounded-2xl border-dashed '>
-                                    <div
-                                        style={{ background: "#008bff" }}
-                                        className="text-white py-10 px-8 flex 
-                                            justify-between items-center space-x-10 rounded-2xl"
-                                    >
-                                        <div>
-                                            <Image src={testimonialImage} alt="Profile of testimonial" />
-                                        </div>
-
-                                        <div>
-                                            <div className='flex justify-between items-end'>
-                                                <h3 className='text-2xl font-bold'> Mr Frank Eboh </h3>
-                                                <p className='text-xs'> 2 days ago </p>
-                                            </div>
-
-                                            <p className='pt-2 text-xl'>
-                                                I couldn't be happier with the service delivery.
-                                                Got my son's medication and everything was
-                                                well packaged and sealed.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </SwiperSlide>
+                                ))
+                            }                            
                         </Swiper>
                     </div>
 
@@ -149,7 +132,7 @@ const Testimonials = () => {
                         </button>
                     </div>
                 </div>
-                
+
             </div>
         </section>
     )
