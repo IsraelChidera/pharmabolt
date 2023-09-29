@@ -4,7 +4,6 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Product as Prod } from '../lib/interface';
 import { groq } from 'next-sanity';
 import client from '../lib/sanity';
-import products from '@/sanity/schemas/products';
 import Link from "next/link";
 import Product from '@/components/widget/Product';
 
@@ -162,6 +161,7 @@ const page = () => {
                         !loading &&
                         categoryProducts.map((item) => (
                             <Product
+                                idx={item.idx}
                                 key={item.slug}
                                 slug={item.slug}
                                 name={item.name}
