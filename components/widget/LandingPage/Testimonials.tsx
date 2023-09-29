@@ -51,8 +51,7 @@ const testimonials = [
     }
 ]
 
-const Testimonials = () => {
-    const swiper = useSwiper();
+const Testimonials = () => {    
     const swiperRef: any = useRef(null);
 
 
@@ -80,7 +79,7 @@ const Testimonials = () => {
 
             <div className='mt-10 mx-auto w-full'>
 
-                <div className='grid grid-cols-6 gap-x-10'>
+                <div className='md:grid grid-cols-6 md:gap-x-10'>
                     <div style={{ background: "#f2f9ff" }} className='rounded-2xl flex justify-end'>
                         <button onClick={slidePrev}>
                             <Image src={leftArrow} alt="left swipe icon" />
@@ -100,15 +99,15 @@ const Testimonials = () => {
                                         <div className=' border-4 p-1 rounded-2xl border-dashed '>
                                             <div
                                                 style={{ background: "#008bff" }}
-                                                className="text-white py-10 px-8 flex 
+                                                className="text-white py-10 md:px-8 md:flex space-y-4 md:space-y-0
                                             justify-between items-center space-x-10 rounded-2xl"
                                             >
-                                                <div>
+                                                <div className='md:block flex items-center justify-center '>
                                                     <Image src={item.image} alt="Profile of testimonial" />
                                                 </div>
 
                                                 <div>
-                                                    <div className='flex justify-between items-end'>
+                                                    <div className='md:flex text-center justify-between items-end'>
                                                         <h3 className='text-2xl font-bold'> {item.name} </h3>
                                                         <p className='text-xs'> {item.posted} </p>
                                                     </div>
