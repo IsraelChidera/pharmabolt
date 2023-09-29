@@ -12,7 +12,6 @@ const query = groq`*[_type == "product"]`;
 const LandingPageLayout = async () => {
     const products: Product[] = await client.fetch(query);
 
-    console.log("asd: ", products);
 
     return (
         <div>
