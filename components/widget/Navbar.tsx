@@ -60,9 +60,7 @@ const Navbar = () => {
 
             <NavigationItem href="/shop">Shop</NavigationItem>
 
-            <NavigationItem href="#">Book a consultation</NavigationItem>
-
-            <NavigationItem href="#">Upload a prescription</NavigationItem>
+            <NavigationItem href="/consultation">Book a consultation</NavigationItem>
 
             <NavigationItem href="#">Contact us</NavigationItem>
 
@@ -111,9 +109,7 @@ const Navbar = () => {
 
               <NavigationItem onClick={() => setOpen(false)} href="/shop">Shop</NavigationItem>
 
-              <NavigationItem href="#">Book a consultation</NavigationItem>
-
-              <NavigationItem onClick={() => setOpen(false)} href="#">Upload a prescription</NavigationItem>
+              <NavigationItem onClick={() => setOpen(false)} href="/consultation">Book a consultation</NavigationItem>              
 
               <NavigationItem onClick={() => setOpen(false)} href="#">Contact us</NavigationItem>
 
