@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useState, useReducer, useRef, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 import leftArrow from '/public/assets/swipe-left-icon.svg';
 import rightArrow from '/public/assets/swipe-right-icon.svg';
 import testimonialImage from '/public/assets/testimonial-image.webp';
@@ -46,7 +46,7 @@ const testimonials = [
         testimonial: `As a healthcare professional, I demand 
         the best for my patients. Pharmabolt consistently 
         delivers top-notch service. Their attention to detail 
-        in packaging and quality assurance is commendable.`,
+        in packaging is commendable.`,
         posted: '1 month ago'
     }
 ]
@@ -90,6 +90,7 @@ const Testimonials = () => {
                         <Swiper
                             ref={swiperRef}
                             modules={[Navigation, Pagination, A11y]}
+                            pagination={true}
                             spaceBetween={30}
                             slidesPerView={1}
                         >
