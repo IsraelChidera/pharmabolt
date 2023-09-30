@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import { CustomButton, SecondaryButton } from '@/components';
 import google from '@/public/assets/google-icon.png';
 import Image from "next/image";
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { FormLoginErrors, FormLoginValues } from '@/types';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { auth, provider } from '@/firebase';

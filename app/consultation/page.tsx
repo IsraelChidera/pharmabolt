@@ -2,23 +2,58 @@
 
 import { useState } from 'react';
 import { useRouter } from "next/navigation";
+import { Form, Formik } from 'formik';
+import { TextField } from '@mui/material';
+
+
 
 const page = () => {
+
+
+    type ValidateMailProp = {
+        email: string
+    }
+
+    type ValidateMailErrorProp = {
+        email: string
+    }
 
     const navigate = useRouter();
 
     const [email, setEmail] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const initialValues: ValidateMailProp = {
+        email: "",
+    }
+
+    const validateForm = (values: ValidateMailProp) => {
+        const errors: ValidateMailProp = {} as ValidateMailProp
+
+        if (!values.email) {
+            errors.email = "Email is required";
+        } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+        ) {
+            errors.email = "Invalid email address";
+        }
+
+        return errors;
+    }
+
+
     const handleEmailChange = (e: any) => {
         setEmail(e.target.value);
+
     };
 
-    const handleJoinWaitlist = () => {
-        // You can add your logic here to handle the email submission, e.g., sending it to a server.
-        // For this example, we'll simply set a flag to indicate submission.
+    const handleSubmit = () => {
         setIsSubmitted(true);
     };
+
+    const onLogin = (values: ValidateMailProp) => {
+        console.log(values);
+    }
 
     return (
         <div className=" h-screen flex items-center justify-center">
@@ -33,15 +68,47 @@ const page = () => {
                             Join our waitlist to be the first to know when it's available.
                         </p>
                         <div className="md:flex space-y-4 md:space-y-0 justify-center">
-                            <input
-                                type="email"
-                                placeholder="Your Email"
-                                className="border border-gray-300 px-3 md:text-base text-sm py-2 rounded-md mr-2"
-                                value={email}
-                                onChange={handleEmailChange}
-                            />
+
+                            <Formik
+                                initialValues={initialValues}
+                                validate={validateForm}
+                                onSubmit={(values) => onLogin(values)}
+                            >
+
+                                {
+                                    (
+                                        { values, errors, touched, handleChange, handleSubmit }:
+                                            {
+                                                values: ValidateMailProp, errors: any,
+                                                touched: any, handleChange: any, handleSubmit: any
+                                            }
+                                    ) => (
+                                        <Form>
+                                            <TextField
+                                                type="email"
+                                                placeholder="Your Email"
+                                                className="border border-gray-300 px-3 md:text-base text-sm py-2 rounded-md mr-2"
+                                                value={email}
+                                                onChange={handleEmailChange}
+                                                required
+                                            />
+                                        </Form>
+                                    )
+                                }
+                            </Formik>
+                            <form>
+                                <input
+                                    type="email"
+                                    placeholder="Your Email"
+                                    className="border border-gray-300 px-3 md:text-base text-sm py-2 rounded-md mr-2"
+                                    value={email}
+                                    onChange={handleEmailChange}
+                                    required
+                                />
+                            </form>
                             <button
-                                onClick={handleJoinWaitlist}
+                                type="submit"
+                                onClick={handleSubmit}
                                 className="bg-blue-500 text-white md:text-base text-sm px-4 py-2 rounded-md"
                             >
                                 Join Waitlist
