@@ -47,12 +47,9 @@ const page = () => {
 
     };
 
-    const handleSubmit = () => {
-        setIsSubmitted(true);
-    };
-
     const onLogin = (values: ValidateMailProp) => {
         console.log(values);
+        setIsSubmitted(true);
     }
 
     return (
@@ -84,35 +81,31 @@ const page = () => {
                                             }
                                     ) => (
                                         <Form>
-                                            <TextField
+                                            <input
                                                 type="email"
                                                 placeholder="Your Email"
-                                                className="border border-gray-300 px-3 md:text-base text-sm py-2 rounded-md mr-2"
-                                                value={email}
-                                                onChange={handleEmailChange}
-                                                required
+                                                name="email"
+                                                className={`border border-gray-300 px-3 md:text-base text-sm py-2 rounded-md mr-2`}
+                                                value={values.email}
+                                                onChange={handleChange}
+                                                required                                                
                                             />
+                                        
+                                            <button
+                                                type="submit"
+                                                className="bg-blue-500 text-white md:text-base text-sm px-4 py-2 rounded-md"
+                                            >
+                                                Join Waitlist
+                                            </button>
+
+                                            <p className='text-xs text-red-700'>
+                                                {errors.email && touched.email && errors.email}
+                                            </p>
                                         </Form>
                                     )
                                 }
                             </Formik>
-                            <form>
-                                <input
-                                    type="email"
-                                    placeholder="Your Email"
-                                    className="border border-gray-300 px-3 md:text-base text-sm py-2 rounded-md mr-2"
-                                    value={email}
-                                    onChange={handleEmailChange}
-                                    required
-                                />
-                            </form>
-                            <button
-                                type="submit"
-                                onClick={handleSubmit}
-                                className="bg-blue-500 text-white md:text-base text-sm px-4 py-2 rounded-md"
-                            >
-                                Join Waitlist
-                            </button>
+
                         </div>
                     </div>
                 ) : (
