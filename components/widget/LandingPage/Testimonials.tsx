@@ -97,7 +97,7 @@ const Testimonials = () => {
                             {
                                 testimonials.map((item) => (
                                     <SwiperSlide key={item.name}>
-                                        <div className=' border-4 p-1 rounded-2xl border-dashed '>
+                                        <div className=' border-4 mb-10 p-1 rounded-2xl border-dashed '>
                                             <div
                                                 style={{ background: "#008bff" }}
                                                 className="text-white py-10 md:px-8 md:flex space-y-4 md:space-y-0
