@@ -93,7 +93,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         fetchData();
     }, [])
 
-    console.log("Products here: ", products);
+    
     
 
 
