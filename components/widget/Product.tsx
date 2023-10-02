@@ -20,7 +20,7 @@ const Product = ({ _id, name, image, price, slug, description, popularproducts, 
         return name;
     }  
 
-    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart();
+    const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } = useShoppingCart();
 
     const quantity = getItemQuantity(_id);        
 

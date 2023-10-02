@@ -13,14 +13,15 @@ import cart from '../../public/assets/cart-icon.svg';
 import { useRouter } from 'next/navigation';
 import NavigationItem from '../elements/NavigationItem';
 import { CustomButton, SecondaryButton } from '..';
+import { useShoppingCart } from '@/utilities/CartContext';
 //kally IT
 //www.kallysit.com
 
 const Navbar = () => {
 
   const navigate = useRouter();
-
   const [open, setOpen] = useState(false);
+  const { cartQuantity } = useShoppingCart();
 
   const openMobileMenu = () => {
     setOpen(prev => !prev);
@@ -67,7 +68,12 @@ const Navbar = () => {
             <div className='flex space-x-3'>
               <div className='relative'>
                 <Image src={cart} alt='cart icon' className='relative z-20' />
-                <span style={{ fontSize: "9px", background: "#E20000" }} className=' p-0.5 z-10 rounded-md text-white absolute -top-3 -right-2'>3</span>
+                <span 
+                  style={{ fontSize: "9px", background: "#E20000" }} 
+                  className=' p-0.5 z-10 rounded-md text-white absolute -top-3 
+                  -right-2'>
+                    {cartQuantity}
+                  </span>
               </div>
               <NavigationItem className="flex space-x-1" href="/cart">
                 <span>cart</span>
