@@ -10,11 +10,13 @@ type CartItems = {
     quantity: number,
 }
 
-type CartContextType = {
+type CartContextType = {    
     getItemQuantity: (id: any) => number,
     increaseCartQuantity: (id: any) => void,
     decreaseCartQuantity: (id: any) => void,
-    removeFromCart: (id: any) => void
+    removeFromCart: (id: any) => void,
+    cartQuantity: number,
+    cartItems: CartItems[]
 }
 
 
@@ -69,8 +71,19 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         })
     }
 
+    const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+
     return (
-        <CartContext.Provider value={{ getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart }}>
+        <CartContext.Provider
+            value={{
+                getItemQuantity,
+                increaseCartQuantity,
+                decreaseCartQuantity,
+                removeFromCart,
+                cartItems,
+                cartQuantity
+            }}
+        >
             {children}
         </CartContext.Provider>
     )
