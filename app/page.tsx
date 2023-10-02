@@ -11,9 +11,7 @@ const query = groq`*[_type == "product"]`;
 
 export default async function Home() {
 
-  const products = await client.fetch(query);  
-
-  // console.log("all p: ", products);    
+  const products = await client.fetch(query);     
 
   return (
     <main className=''>            

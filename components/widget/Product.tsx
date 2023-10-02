@@ -8,7 +8,7 @@ import { urlfor } from '@/app/lib/sanity';
 import { useShoppingCart } from '@/utilities/CartContext';
 // import { useRouter } from 'next/navigation';
 
-const Product = ({ idx, name, image, price, slug, description, popularproducts, categories }: Product) => {
+const Product = ({ _id, name, image, price, slug, description, popularproducts, categories }: Product) => {
 
     const truncatedLongName = (name: string, maxLengthOfProductName: number) => {
         if (name.length > maxLengthOfProductName) {
@@ -22,8 +22,7 @@ const Product = ({ idx, name, image, price, slug, description, popularproducts, 
 
     const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart } = useShoppingCart();
 
-    const quantity = getItemQuantity(idx);    
-
+    const quantity = getItemQuantity(_id);        
 
     return (
         <section className='flex justify-center'>
@@ -49,16 +48,16 @@ const Product = ({ idx, name, image, price, slug, description, popularproducts, 
                         <CustomButton
                             title="Add to cart"
                             className='w-full py-2 text-xs mt-4'
-                            onClick={() => increaseCartQuantity(idx)}
+                            onClick={() => increaseCartQuantity(_id)}
                         />
                         :
                         <div className='md:text-lg flex space-x-4 items-center mt-6 md:mt-4'>
                             <p className='text-xs'>Quantity</p>
                             <div className='flex items-center space-x-10'>
-                                <button onClick={() => decreaseCartQuantity(idx)} className='font-bold bg-blue-700 border 
+                                <button onClick={() => decreaseCartQuantity(_id)} className='font-bold bg-blue-700 border 
                                 px-2 text-white rounded-md'> - </button>
                                 <p> {quantity} </p>
-                                <button onClick={() => increaseCartQuantity(idx)} className='font-bold bg-blue-700 border 
+                                <button onClick={() => increaseCartQuantity(_id)} className='font-bold bg-blue-700 border 
                                 px-2 text-white rounded-md'> + </button>
                             </div>
                         </div>

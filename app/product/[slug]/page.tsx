@@ -15,7 +15,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
 
   const queryAllProducts = groq`*[_type == "product"]`;
   const allProducts = await client.fetch(queryAllProducts) as Product[];  
-
+  
 
   return (
     <section className='md:mx-auto md:w-5/6 mx-4 mt-12'>
@@ -53,7 +53,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
           {
             allProducts.slice(0,4).map((item) => (
               <Product
-                idx={item.idx}
+                _id={item._id}
                 key={item.slug}
                 slug={item.slug}
                 name={item.name}
