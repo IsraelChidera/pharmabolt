@@ -68,12 +68,15 @@ const Navbar = () => {
             <div className='flex space-x-3'>
               <div className='relative'>
                 <Image src={cart} alt='cart icon' className='relative z-20' />
-                <span 
-                  style={{ fontSize: "9px", background: "#E20000" }} 
-                  className=' p-0.5 z-10 rounded-md text-white absolute -top-3 
+                {
+                  cartQuantity > 0 &&
+                  <span
+                    style={{ fontSize: "9px", background: "#E20000" }}
+                    className=' p-0.5 z-10 rounded-md text-white absolute -top-3 
                   -right-2'>
                     {cartQuantity}
                   </span>
+                }
               </div>
               <NavigationItem className="flex space-x-1" href="/cart">
                 <span>cart</span>
@@ -115,7 +118,7 @@ const Navbar = () => {
 
               <NavigationItem onClick={() => setOpen(false)} href="/shop">Shop</NavigationItem>
 
-              <NavigationItem onClick={() => setOpen(false)} href="/consultation">Book a consultation</NavigationItem>              
+              <NavigationItem onClick={() => setOpen(false)} href="/consultation">Book a consultation</NavigationItem>
 
               <NavigationItem onClick={() => setOpen(false)} href="#">Contact us</NavigationItem>
 
