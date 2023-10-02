@@ -1,6 +1,13 @@
 'use client'
 
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+
+import { groq } from 'next-sanity';
+import { Product } from "@/app/lib/interface";
+import client from "@/app/lib/sanity";
+
+
+
 type ShoppingCartProviderProps = {
     children: ReactNode
 }
@@ -10,13 +17,14 @@ type CartItems = {
     quantity: number,
 }
 
-type CartContextType = {    
+type CartContextType = {
     getItemQuantity: (id: any) => number,
     increaseCartQuantity: (id: any) => void,
     decreaseCartQuantity: (id: any) => void,
     removeFromCart: (id: any) => void,
     cartQuantity: number,
-    cartItems: CartItems[]
+    cartItems: CartItems[],
+    products: Product[]
 }
 
 
@@ -28,6 +36,7 @@ export function useShoppingCart() {
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
+    const [products, setProducts] = useState([]);
 
     const getItemQuantity = (id: any) => {
         return cartItems.find(item => item.id === id)?.quantity || 0;
@@ -73,6 +82,21 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
 
+    const fetchData = async () => {
+        const queryAllProducts = groq`*[_type == "product"]`;
+        const allProducts: any = await client.fetch(queryAllProducts) as Product[];
+
+        setProducts(allProducts);
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+    console.log("Products here: ", products);
+    
+
+
     return (
         <CartContext.Provider
             value={{
@@ -81,7 +105,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                 decreaseCartQuantity,
                 removeFromCart,
                 cartItems,
-                cartQuantity
+                cartQuantity,
+                products
             }}
         >
             {children}

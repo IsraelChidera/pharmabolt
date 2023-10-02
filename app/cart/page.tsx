@@ -7,10 +7,17 @@ import product1 from '../../public/assets/product.png';
 import deleteIcon from '../../public/assets/delete-icon.png';
 import { CustomButton } from '@/components';
 import { useRouter } from "next/navigation";
+import { useShoppingCart } from '@/utilities/CartContext';
+import CartItem from '@/components/widget/CartItem';
 
 const page = () => {
 
     const navigate = useRouter();
+
+    const { cartItems } = useShoppingCart();
+
+    console.log("Cart: ", cartItems);
+
     return (
         <section className="px-3 md:mx-auto md:max-w-6xl mt-20 pb-10">
             <div className="flex items-end justify-between">
@@ -93,6 +100,12 @@ const page = () => {
                             </div>
                         </div>
                     </section>
+
+                    {
+                        cartItems.map(item => (
+                            <CartItem key={item.id} {...item} />
+                        ))
+                    }
                 </div>
 
                 <aside className='mt-20 md:mt-0 md:mb-0 mb-20'>
@@ -120,9 +133,9 @@ const page = () => {
                         </div>
 
                         <div className='mt-10'>
-                            <CustomButton 
-                                className='w-full py-3' 
-                                title="Proceed to Checkout"  
+                            <CustomButton
+                                className='w-full py-3'
+                                title="Proceed to Checkout"
                                 onClick={() => navigate.push("/cart/checkout")}
                             />
                         </div>

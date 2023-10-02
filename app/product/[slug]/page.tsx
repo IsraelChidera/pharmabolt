@@ -6,6 +6,7 @@ import client, { urlfor } from '../../lib/sanity';
 import { groq } from 'next-sanity';
 import { PageProps, Product as Prod } from '../..//lib/interface';
 import Product from '@/components/widget/Product';
+import { useShoppingCart } from '@/utilities/CartContext';
 
 
 
@@ -14,8 +15,9 @@ const Page = async ({ params: { slug } }: PageProps) => {
   const products = await client.fetch(query) as Prod;
 
   const queryAllProducts = groq`*[_type == "product"]`;
-  const allProducts = await client.fetch(queryAllProducts) as Product[];  
-  
+  const allProducts = await client.fetch(queryAllProducts) as Product[];
+
+  const { increaseCartQuantity } = useShoppingCart();
 
   return (
     <section className='md:mx-auto md:w-5/6 mx-4 mt-12'>
@@ -43,7 +45,11 @@ const Page = async ({ params: { slug } }: PageProps) => {
               </div>
             </div>
 
-            <CustomButton title='Add to cart' className='px-20 py-2 text-sm mt-8 md:mt-4' />
+            <CustomButton 
+              // onClick={() => increaseCartQuantity(_id)} 
+              title='Add to cart' 
+              className='px-20 py-2 text-sm mt-8 md:mt-4' 
+            />
           </div>
         </div>
       </div>
@@ -51,16 +57,16 @@ const Page = async ({ params: { slug } }: PageProps) => {
       <div className='md:mt-20 md:mb-20'>
         <div className='pt-6 pb-10 mt-10 grid-container '>
           {
-            allProducts.slice(0,4).map((item) => (
+            allProducts.slice(0, 4).map((item) => (
               <Product
                 _id={item._id}
-                key={item.slug}
+                key={item._id}
                 slug={item.slug}
                 name={item.name}
                 image={item.image}
                 price={item.price}
                 description={item.description}
-                popularproducts={item.popularproducts}                       
+                popularproducts={item.popularproducts}
                 categories={item.categories}
               />
             ))
