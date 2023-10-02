@@ -17,8 +17,6 @@ const Page = async ({ params: { slug } }: PageProps) => {
   const queryAllProducts = groq`*[_type == "product"]`;
   const allProducts = await client.fetch(queryAllProducts) as Product[];
 
-  const { increaseCartQuantity } = useShoppingCart();
-
   return (
     <section className='md:mx-auto md:w-5/6 mx-4 mt-12'>
       <div className='md:grid md:grid-cols-2 md:gap-x-10 border-b md:pt-10 md:pb-20 pb-8'>

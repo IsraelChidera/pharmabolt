@@ -15,7 +15,7 @@ const CartItem = ({ id, quantity }: { id: any, quantity: number }) => {
     if (item == null) return null
 
     return (
-        <section className='mt-20 pb-10 border-b flex h-fit justify-between space-x-10'>
+        <section className='mt-10 pb-10 border-b flex h-fit justify-between space-x-10'>
             <div className='flex space-x-3'>
                 <div className='border rounded-md'>
                     <img style={{ width: "142px", height: "142px" }} src={urlfor(item.image.asset._ref).url()} alt={item.image.alt} />
