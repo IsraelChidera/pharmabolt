@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from '../Navbar'
-import Footer from '../Footer'
 import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonials, } from '@/components'
 
 import client from '../../../app/lib/sanity';

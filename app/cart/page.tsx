@@ -17,7 +17,6 @@ const page = () => {
 
     const { cartItems } = useShoppingCart();
 
-    console.log("Cart: ", cartItems);
 
     return (
         <div>

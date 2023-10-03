@@ -22,7 +22,7 @@ const Products = ({ products }: { products: ProductType[] }) => {
                 {
                     products.map(item => (
                         <>
-                            <div key={item.idx}>
+                            <div key={item._id}>
                                 <Product
                                     {...item}
                                 />

@@ -1,35 +1,23 @@
 'use client'
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import product from '../../../public/assets/product.png';
+import React from 'react';
 import { CustomButton } from '@/components';
-import client, { urlfor } from '../../lib/sanity';
-import { groq } from 'next-sanity';
+import { urlfor } from '../../lib/sanity';
 import { PageProps, Product as Prod } from '../..//lib/interface';
 import Product from '@/components/widget/Product';
 import { useShoppingCart } from '@/utilities/CartContext';
+import { useRouter } from 'next/navigation';
 
 
 
 const Page = ({ params: { slug } }: PageProps) => {
-  const [product, setProduct] = useState<any>({});
+  
+  const navigate = useRouter();
 
   const { products, increaseCartQuantity, decreaseCartQuantity } = useShoppingCart();
 
-  const fetchSingleProduct = async () => {
-    const query = groq`*[_type == "product" && slug.current == '${slug}'][0]`;
-    const products: any = await client.fetch(query);
-    setProduct(products);
-
-  }
-
-  useEffect(() => {
-    fetchSingleProduct();
-  }, [])
-
-  useEffect(() => {
-    console.log(product);
-  }, [product])
+  const product:any = products.find(item => item.slug.current == slug);
+  console.log("product here: ", product)
+  console.log("slug here: ", slug)
 
 
   return (
@@ -52,18 +40,10 @@ const Page = ({ params: { slug } }: PageProps) => {
               <p className='md:text-base text-sm'>
                 {product.description}
               </p>
+              
 
-              <div className='md:text-lg flex space-x-4 items-center mt-6 md:mt-4'>
-                <p>Quantity</p>
-                <div className='flex items-center space-x-10'>
-                  <button className='font-bold'> - </button>
-                  <p> 1 </p>
-                  <button className='font-bold'> + </button>
-                </div>
-              </div>
-
-              <CustomButton
-                // onClick={() => increaseCartQuantity(_id)} 
+              <CustomButton                
+                onClick={() => {increaseCartQuantity(product._id); navigate.push("/cart")}}
                 title='Add to cart'
                 className='px-20 py-2 text-sm mt-8 md:mt-4'
               />
