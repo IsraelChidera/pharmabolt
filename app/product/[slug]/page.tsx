@@ -43,10 +43,10 @@ const Page = async ({ params: { slug } }: PageProps) => {
               </div>
             </div>
 
-            <CustomButton 
+            <CustomButton
               // onClick={() => increaseCartQuantity(_id)} 
-              title='Add to cart' 
-              className='px-20 py-2 text-sm mt-8 md:mt-4' 
+              title='Add to cart'
+              className='px-20 py-2 text-sm mt-8 md:mt-4'
             />
           </div>
         </div>
@@ -57,15 +57,7 @@ const Page = async ({ params: { slug } }: PageProps) => {
           {
             allProducts.slice(0, 4).map((item) => (
               <Product
-                _id={item._id}
-                key={item._id}
-                slug={item.slug}
-                name={item.name}
-                image={item.image}
-                price={item.price}
-                description={item.description}
-                popularproducts={item.popularproducts}
-                categories={item.categories}
+                {...item}
               />
             ))
           }

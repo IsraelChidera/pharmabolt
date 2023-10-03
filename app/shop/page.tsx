@@ -13,7 +13,7 @@ const page = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | any>("");
     const [allDrugProduct, setAllDrugProduct] = useState<Prod[]>([]);
-            
+
 
     const fetchData = async () => {
         try {
@@ -112,7 +112,7 @@ const page = () => {
 
                                                 <li
                                                     onClick={() => {
-                                                        handleCategoryChange(item); 
+                                                        handleCategoryChange(item);
                                                         setOpen(false);
                                                     }}
                                                     className='cursor-pointer pb-4'
@@ -161,15 +161,7 @@ const page = () => {
                         !loading &&
                         categoryProducts.map((item) => (
                             <Product
-                                idx={item.idx}
-                                key={item.slug}
-                                slug={item.slug}
-                                name={item.name}
-                                image={item.image}
-                                price={item.price}
-                                description={item.description}
-                                popularproducts={item.popularproducts}
-                                categories={item.categories}
+                                {...item}
                             />
                         ))
                     }
