@@ -3,7 +3,7 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 import { groq } from 'next-sanity';
-import { Product } from "@/app/lib/interface";
+import { PageProps, Product, Product as Prod } from "@/app/lib/interface";
 import client from "@/app/lib/sanity";
 
 
@@ -37,6 +37,7 @@ export function useShoppingCart() {
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
     const [products, setProducts] = useState([]);
+    const [singleProduct, setSingleProduct] = useState({});
 
     const getItemQuantity = (id: any) => {
         return cartItems.find(item => item.id === id)?.quantity || 0;
@@ -89,13 +90,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         setProducts(allProducts);
     }
 
+ 
+
     useEffect(() => {
         fetchData();
     }, [])
-
-    
-    
-
 
     return (
         <CartContext.Provider
