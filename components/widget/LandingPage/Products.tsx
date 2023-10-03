@@ -30,7 +30,6 @@ const Products = ({ products }: { products: ProductType[] }) => {
                         </>
                     ))
                 }
-
             </div>
 
             <div className='mx-auto md:mt-12 mt-14 flex items-center justify-center'>

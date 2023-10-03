@@ -43,6 +43,7 @@ const Product = ({ _id, name, image, price, slug, description, popularproducts, 
                     <p className='text-xs'>NGN {price} </p>
 
                 </Link>
+                
                 {
                     quantity === 0 ?
                         <CustomButton

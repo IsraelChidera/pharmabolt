@@ -40,22 +40,22 @@ const Page = ({ params: { slug } }: PageProps) => {
                 {product.description}
               </p>
 
-
-              <div className='text-xs w-fit border p-2 flex space-x-4 items-center mt-6 md:mt-4'>
-                <p style={{ color: "#D0D0D0" }}>Quantity</p>
-                <div className='flex items-center space-x-5'>
-                  <button className='font-bold'> - </button>
-                  <p> {quantity} </p>
-                  <button className='font-bold' onClick={() => increaseCartQuantity(product._id)}> + </button>
-                </div>
-              </div>
-
-
-              <CustomButton
-                onClick={() => { increaseCartQuantity(product._id); navigate.push("/cart") }}
-                title='Add to cart'
-                className='px-20 py-2 text-sm mt-8 md:mt-4'
-              />
+              {
+                quantity > 0 ?
+                  <div className='text-xs w-fit border p-2 flex space-x-4 items-center mt-6 md:mt-4'>
+                    <p style={{ color: "#D0D0D0" }}>Quantity</p>
+                    <div className='flex items-center space-x-5'>
+                      <button className='font-bold'> - </button>
+                      <p> {quantity} </p>
+                      <button className='font-bold' onClick={() => increaseCartQuantity(product._id)}> + </button>
+                    </div>
+                  </div> :
+                  <CustomButton
+                    onClick={() => { increaseCartQuantity(product._id)}}
+                    title='Add to cart'
+                    className='px-20 py-2 text-sm mt-8 md:mt-4'
+                  />
+              }
             </div>
           </div>
         </div>
