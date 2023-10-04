@@ -47,7 +47,7 @@ const Hero = () => {
                 </section>
 
                 <div>
-                    <Image src={hero} style={{ objectFit: "cover" }} alt="hero image" className='hero-image' />
+                    <Image src={hero} alt="hero image" className='object-contain hero-image' />
                 </div>
             </div>
 

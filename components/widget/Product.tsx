@@ -18,11 +18,11 @@ const Product = ({ _id, name, image, price, slug, description, popularproducts, 
         }
 
         return name;
-    }  
+    }
 
     const { getItemQuantity, increaseCartQuantity, decreaseCartQuantity } = useShoppingCart();
 
-    const quantity = getItemQuantity(_id);        
+    const quantity = getItemQuantity(_id);
 
     return (
         <section className='flex justify-center'>
@@ -36,14 +36,15 @@ const Product = ({ _id, name, image, price, slug, description, popularproducts, 
                             <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
                         </div>}
 
-                        <img src={urlfor(image.asset._ref).url()} alt={image.alt} />
+                        <img className='md:block hidden object-contain' style={{  width: "290px", height: "275px" }} src={urlfor(image.asset._ref).url()} alt={image.alt} />
+                        <img className='block md:hidden object-contain' style={{  width: "174px", height: "197px" }} src={urlfor(image.asset._ref).url()} alt={image.alt} />
                     </div>
 
                     <p className='font-bold pt-2'> {truncatedLongName(name, 21)} </p>
                     <p className='text-xs'>NGN {price} </p>
 
                 </Link>
-                
+
                 {
                     quantity === 0 ?
                         <CustomButton
