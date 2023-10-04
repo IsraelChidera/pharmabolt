@@ -9,7 +9,7 @@ const CartItem = ({ id, quantity }: { id: any, quantity: number }) => {
 
     const { products, removeFromCart, increaseCartQuantity } = useShoppingCart();
 
-    const item = products.find(item => item._id === id);
+    const item: any = products.find(item => item._id === id);
 
 
     if (item == null) return null
@@ -40,9 +40,9 @@ const CartItem = ({ id, quantity }: { id: any, quantity: number }) => {
             </div>
 
             <div className=' text-sm flex flex-col justify-between'>
-                <p> NGN {item.price} </p>
+                <p> NGN {item.price * quantity} </p>
 
-                <div onClick={() => removeFromCart(id)} className='flex space-x-2 items-center text-primary'>
+                <div onClick={() => removeFromCart(item._id)} className='flex space-x-2 items-center text-primary'>
                     <Image src={deleteIcon} alt="delete icon" />
                     <p className='text-xs'>Remove</p>
                 </div>

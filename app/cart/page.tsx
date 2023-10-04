@@ -15,8 +15,17 @@ const page = () => {
 
     const navigate = useRouter();
 
-    const { cartItems } = useShoppingCart();
+    const { cartItems, products, setTotalPrice} = useShoppingCart();
 
+    const totalPrice: any = cartItems.reduce((total, cartItem) => {
+        const item = products.find(i => i._id === cartItem.id)
+
+        return total + (item?.price || 0) * cartItem.quantity
+    }, 0);
+
+    const deliveryPrice = 2100;
+    const totalPayment = totalPrice + deliveryPrice;
+    setTotalPrice(totalPayment);
 
     return (
         <div>
@@ -48,13 +57,13 @@ const page = () => {
                                     <div className='flex justify-between'>
                                         <p> Products </p>
 
-                                        <p className='font-bold'> NGN 13,738 </p>
+                                        <p className='font-bold'> NGN {totalPrice} </p>
                                     </div>
 
                                     <div className='mt-4 flex justify-between'>
                                         <p> Delivery </p>
 
-                                        <p className='font-bold'> NGN 1,200 </p>
+                                        <p className='font-bold'> NGN {deliveryPrice} </p>
                                     </div>
 
                                     <p className='mt-3 text-primary border-b text-xs pb-8 underline'>
@@ -64,7 +73,7 @@ const page = () => {
                                     <div className='mt-6 flex justify-between'>
                                         <p> Total </p>
 
-                                        <p className='font-bold'> NGN 14,938</p>
+                                        <p className='font-bold'> NGN {totalPayment}</p>
                                     </div>
 
                                     <div className='mt-10'>

@@ -11,11 +11,17 @@ import TextField from '@mui/material/TextField';
 import { CustomButton } from '@/components';
 import product1 from '../../../public/assets/product.png';
 import Image from "next/image";
+import { useShoppingCart } from '@/utilities/CartContext';
 
 const page = () => {
-
+    
     const [selectedOption, setSelectedOption] = useState('Store pickup');
     const [selectedPaymentOption, setSelectedPaymentOption] = useState("Debit/credit card");
+
+    const { totalPrice } = useShoppingCart();
+
+    console.log(totalPrice);
+    
 
     const handleChange = (event: any) => {
         setSelectedOption(event.target.value);
@@ -273,6 +279,7 @@ const page = () => {
 
                                 <p className='pt-4 text-sm'>
                                     Your order will only be shipped once payment is confirmed.
+                                    Contact +234-814-626-5074 to confirm your order
                                 </p>
                             </div>
 
@@ -324,17 +331,17 @@ const page = () => {
                 <div className='text-xs mt-2'>
                     <div className='flex justify-between'>
                         <p>Products: </p>
-                        <p className='font-semibold'>NGN 13 738</p>
+                        <p className='font-semibold'>NGN {totalPrice}</p>
                     </div>
 
                     <div className='mt-2 flex justify-between'>
-                        <p>Delivery: </p>
+                        <p>VAT: </p>
                         <p className='font-semibold'>NGN 0.00</p>
                     </div>
 
                     <div className='border-t border-b md:border-none pb-3 md:pb-0 pt-3 mt-6 flex justify-between'>
                         <p>Total: </p>
-                        <p className='font-semibold'>NGN 13 738</p>
+                        <p className='font-semibold'>NGN {totalPrice}</p>
                     </div>
                 </div>
             </aside>

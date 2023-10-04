@@ -24,7 +24,9 @@ type CartContextType = {
     removeFromCart: (id: any) => void,
     cartQuantity: number,
     cartItems: CartItems[],
-    products: Product[]
+    products: Product[],
+    setTotalPrice: any,
+    totalPrice: any
 }
 
 
@@ -37,7 +39,8 @@ export function useShoppingCart() {
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [cartItems, setCartItems] = useState<CartItems[]>([]);
     const [products, setProducts] = useState([]);
-    const [singleProduct, setSingleProduct] = useState({});
+    const [errorMessage, setErrorMessage] = useState<string>("");
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const getItemQuantity = (id: any) => {
         return cartItems.find(item => item.id === id)?.quantity || 0;
@@ -83,17 +86,28 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
 
-    const fetchData = async () => {
-        const queryAllProducts = groq`*[_type == "product"]`;
-        const allProducts: any = await client.fetch(queryAllProducts) as Product[];
 
-        setProducts(allProducts);
+
+
+    const fetchAllProducts = async () => {
+        try {
+            const queryAllProducts = groq`*[_type == "product"]`;
+            const allProducts: any = await client.fetch(queryAllProducts) as Product[];
+
+            setProducts(allProducts);
+        }
+        catch (error: any) {
+            console.log("error fetching data: ", error);
+
+            setErrorMessage("Error")
+            console.log(errorMessage);
+        }
+
+        console.log("error message: ", errorMessage);
     }
 
- 
-
     useEffect(() => {
-        fetchData();
+        fetchAllProducts();
     }, [])
 
     return (
@@ -105,7 +119,9 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                 removeFromCart,
                 cartItems,
                 cartQuantity,
-                products
+                products,
+                setTotalPrice,
+                totalPrice
             }}
         >
             {children}

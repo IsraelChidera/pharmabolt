@@ -1,4 +1,4 @@
-import { BookConsultation, CreateAccount, Hero, Newsletter, Products, Testimonials, } from '@/components'
+
 import client from './lib/sanity';
 import { groq } from 'next-sanity';
 import { Product } from './lib/interface';
