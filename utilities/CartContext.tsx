@@ -5,6 +5,7 @@ import { ReactNode, createContext, useContext, useEffect, useState } from "react
 import { groq } from 'next-sanity';
 import { PageProps, Product, Product as Prod } from "@/app/lib/interface";
 import client from "@/app/lib/sanity";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 
 
@@ -37,7 +38,7 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-    const [cartItems, setCartItems] = useState<CartItems[]>([]);
+    const [cartItems, setCartItems] = useLocalStorage<CartItems[]>("shopping-cart", []);
     const [products, setProducts] = useState([]);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [totalPrice, setTotalPrice] = useState(0);
