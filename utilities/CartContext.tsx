@@ -7,8 +7,6 @@ import { PageProps, Product, Product as Prod } from "@/app/lib/interface";
 import client from "@/app/lib/sanity";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-
-
 type ShoppingCartProviderProps = {
     children: ReactNode
 }
@@ -30,7 +28,6 @@ type CartContextType = {
     totalPrice: any
 }
 
-
 const CartContext = createContext({} as CartContextType);
 
 export function useShoppingCart() {
@@ -44,15 +41,15 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [totalPrice, setTotalPrice] = useState(0);
 
     const getItemQuantity = (id: any) => {
-        return cartItems.find(item => item.id === id)?.quantity || 0;
+        return cartItems?.find(item => item.id === id)?.quantity || 0;
     }
 
     const increaseCartQuantity = (id: any) => {
         setCartItems(cartItems => {
-            if (cartItems.find(item => item.id === id) == null) {
+            if (cartItems?.find(item => item.id === id) == null) {
                 return [...cartItems, { id, quantity: 1 }]
             } else {
-                return cartItems.map(item => {
+                return cartItems?.map(item => {
                     if (item.id === id) {
                         return { ...item, quantity: item.quantity + 1 }
                     } else {
@@ -65,10 +62,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     const decreaseCartQuantity = (id: any) => {
         setCartItems(cartItems => {
-            if (cartItems.find(item => item.id === id)?.quantity === 1) {
-                return cartItems.filter(item => item.id !== id)
+            if (cartItems?.find(item => item.id === id)?.quantity === 1) {
+                return cartItems?.filter(item => item.id !== id)
             } else {
-                return cartItems.map(item => {
+                return cartItems?.map(item => {
                     if (item.id === id) {
                         return { ...item, quantity: item.quantity - 1 }
                     } else {
@@ -81,13 +78,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
     const removeFromCart = (id: any) => {
         setCartItems(cartItems => {
-            return cartItems.filter(item => item.id !== id);
+            return cartItems?.filter(item => item.id !== id);
         })
     }
 
-    const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
-
-
+    const cartQuantity = cartItems?.reduce((quantity, item) => item.quantity + quantity, 0)
 
 
     const fetchAllProducts = async () => {

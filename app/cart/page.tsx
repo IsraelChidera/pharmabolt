@@ -17,8 +17,8 @@ const page = () => {
 
     const { cartItems, products, setTotalPrice} = useShoppingCart();
 
-    const totalPrice: any = cartItems.reduce((total, cartItem) => {
-        const item = products.find(i => i._id === cartItem.id)
+    const totalPrice: any = cartItems?.reduce((total, cartItem) => {
+        const item = products?.find(i => i._id === cartItem.id)
 
         return total + (item?.price || 0) * cartItem.quantity
     }, 0);
@@ -30,7 +30,7 @@ const page = () => {
     return (
         <div>
             {
-                cartItems.length > 0 ?
+                cartItems?.length > 0 ?
                     (<section className="px-3 md:mx-auto md:max-w-6xl mt-20 pb-10">
                         <div className="flex items-end justify-between">
                             <div>
@@ -46,7 +46,7 @@ const page = () => {
                         <div className='mt-5 md:grid grid-cols-2 md:space-x-40'>
                             <div>
                                 {
-                                    cartItems.map(item => (
+                                    cartItems?.map(item => (
                                         <CartItem key={item.id} {...item} />
                                     ))
                                 }
