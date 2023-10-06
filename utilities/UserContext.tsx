@@ -1,9 +1,25 @@
-import React from 'react'
+'use client'
+import React, { createContext, useContext } from 'react';
 
-const UserContext = () => {
-  return (
-    <div>UserContext</div>
-  )
+type UserContextType = {
+    getUser: () => void
 }
 
-export default UserContext
+const UserContext = createContext({} as UserContextType);
+
+export function useUserContext() {
+    return useContext(UserContext);
+}
+
+export function UserProvider({ children }: { children: React.ReactNode }) {
+
+    const getUser = () => {
+
+    }
+
+    return (
+        <UserContext.Provider value={{ getUser }}>
+            {children}
+        </UserContext.Provider>
+    )
+}
