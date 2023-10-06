@@ -16,7 +16,7 @@ const Page = ({ params: { slug } }: PageProps) => {
   const { getItemQuantity, products, increaseCartQuantity, decreaseCartQuantity } = useShoppingCart();
 
   const product: any = products.find(item => item.slug.current == slug);
-  const quantity = getItemQuantity(product._id);
+  const quantity = getItemQuantity(product?._id);
 
 
   return (
@@ -27,7 +27,6 @@ const Page = ({ params: { slug } }: PageProps) => {
             {product && product.image && product.image.asset && (
               <img src={urlfor(product.image.asset._ref).url()} alt={product.slug?.current} />
             )}
-
           </div>
 
           <div className='md:mt-0 mt-6'>
@@ -42,14 +41,15 @@ const Page = ({ params: { slug } }: PageProps) => {
 
               {
                 quantity > 0 ?
-                  <div className='text-xs w-fit border p-2 flex space-x-4 items-center mt-6 md:mt-4'>
+                  <div className='text-xs w-fit border p-2 flex justify-between items-center mt-6 md:mt-4'>
                     <p style={{ color: "#D0D0D0" }}>Quantity</p>
                     <div className='flex items-center space-x-5'>
                       <button className='font-bold'> - </button>
                       <p> {quantity} </p>
                       <button className='font-bold' onClick={() => increaseCartQuantity(product._id)}> + </button>
                     </div>
-                  </div> :
+                  </div> 
+                  :
                   <CustomButton
                     onClick={() => { increaseCartQuantity(product._id)}}
                     title='Add to cart'

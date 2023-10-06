@@ -54,8 +54,8 @@ const Product = ({ _id, name, image, price, slug, description, popularproducts, 
                         />
                         :
                         <div className='md:text-lg flex space-x-4 items-center mt-6 md:mt-4'>
-                            <p className='text-xs'>Quantity</p>
-                            <div className='flex items-center space-x-10'>
+                            <p className='text-xs'>QTY</p>
+                            <div className='flex items-center w-full justify-between'>
                                 <button onClick={() => decreaseCartQuantity(_id)} className='font-bold bg-blue-700 border 
                                 px-2 text-white rounded-md'> - </button>
                                 <p> {quantity} </p>
