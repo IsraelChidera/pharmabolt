@@ -52,6 +52,9 @@ const page = () => {
                 const user = userCredential.user;
                 console.log("successful login");
 
+                navigate.push("/cart");
+                setLoading(false);
+
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -159,7 +162,7 @@ const page = () => {
                                         </div>
                                     </div>
 
-                                    <CustomButton type="submit" title="Sign in" className=' mt-10 py-3 w-full' />
+                                    <CustomButton type="submit" title={`${loading ? 'Logging in' : 'Sign in' }`} className=' mt-10 py-3 w-full' />
 
                                 </Form>
 

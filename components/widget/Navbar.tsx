@@ -17,8 +17,6 @@ import { useShoppingCart } from '@/utilities/CartContext';
 import { useUserContext } from '@/utilities/UserContext';
 import { auth } from '@/firebase';
 import { signOut } from 'firebase/auth';
-//kally IT
-//www.kallysit.com
 
 const Navbar = () => {
 
@@ -30,17 +28,14 @@ const Navbar = () => {
     setOpen(prev => !prev);
   }
 
-
-  const { currentUser } = useUserContext();
-
-  console.log("People de", currentUser);
+  const { currentUser } = useUserContext();  
 
 
   const handleLogout = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
       navigate.push("/login");
-      console.log("Signed out successfully")
+      console.log("Signed out successfully");
     }).catch((error) => {
       // An error happened.
     });
