@@ -14,24 +14,43 @@ import Image from "next/image";
 import { useShoppingCart } from '@/utilities/CartContext';
 import { useUserContext } from '@/utilities/UserContext';
 import { redirect } from 'next/navigation';
+import { urlfor } from '@/app/lib/sanity';
 
 const page = () => {
 
     const [selectedOption, setSelectedOption] = useState('Store pickup');
     const [selectedPaymentOption, setSelectedPaymentOption] = useState("Debit/credit card");
 
-    const { totalPrice } = useShoppingCart();
+    const { totalPrice, cartItems, products } = useShoppingCart();
     const { currentUser } = useUserContext();
 
-    console.log(currentUser);
+    const getProductsInCart = () => {
+        const productsInCart: any = cartItems.map((item) => {
+            const product = products.find((p) => p._id === item.id);
+            if (product) {
+                return {
+                    ...product,
+                    quantity: item.quantity,
+                };
+            }
+            return null;
+        });
+
+        // Remove null values (products not found in the products array)
+        return productsInCart.filter((product: any) => product !== null);
+    };
+
+    const productsInCart: any = getProductsInCart();
+    console.log(productsInCart);
+
 
     useLayoutEffect(() => {
         const userExist = currentUser;
 
-        if(userExist === ""){
+        if (userExist === "") {
             redirect("/login");
         }
-    }, [])
+    }, []);
 
 
     const handleChange = (event: any) => {
@@ -109,7 +128,7 @@ const page = () => {
                             <div>
                                 <TextField
                                     required
-                                    id="outlined-required"
+                                    id="outlined-required name"
                                     label={<span className='text-sm'>Full Name</span>}
                                     size="small"
                                     className='w-full'
@@ -120,7 +139,7 @@ const page = () => {
                                 <TextField
                                     required
                                     type="email"
-                                    id="outlined-required"
+                                    id="outlined-required email"
                                     label={<span className='text-sm'>Email address</span>}
                                     size="small"
                                     className='w-full'
@@ -131,7 +150,7 @@ const page = () => {
                                 <TextField
                                     required
                                     type="tel"
-                                    id="outlined-required"
+                                    id="outlined-required phone"
                                     label={<span className='text-sm'>Phone number</span>}
                                     size="small"
                                     className='w-full'
@@ -142,7 +161,7 @@ const page = () => {
                                 <TextField
                                     type="text"
                                     required
-                                    id="outlined-required"
+                                    id="outlined-required address"
                                     label={<span className='text-sm'>Delivery address</span>}
                                     size="small"
                                     className='w-full'
@@ -153,7 +172,7 @@ const page = () => {
                                 <TextField
                                     required
                                     type="text"
-                                    id="outlined-required"
+                                    id="outlined-required city"
                                     label={<span className='text-sm'>City </span>}
                                     size="small"
                                     className='w-full'
@@ -163,7 +182,7 @@ const page = () => {
                             <div>
                                 <TextField
                                     required
-                                    id="outlined-required"
+                                    id="outlined-required state"
                                     type="text"
                                     label={<span className='text-sm'> State </span>}
                                     size="small"
@@ -178,7 +197,7 @@ const page = () => {
 
                 <div className='mt-10'>
                     <div className="mt-2">
-                        <h3 className='font-bold'> PAYMEENT/BILLING</h3>
+                        <h3 className='font-bold'> PAYMENT/BILLING</h3>
 
                         <p className='text-sm mt-4'> Choose a payment method </p>
                     </div>
@@ -199,7 +218,7 @@ const page = () => {
                             <FormControlLabel
                                 value="Debit/credit card"
                                 control={<Radio />}
-                                label={<span className='text-sm'>Debit/credit card</span>}
+                                label={<span className='text-sm'>Online payment</span>}
                             />
                             <FormControlLabel
                                 value="Bank transfer"
@@ -221,40 +240,7 @@ const page = () => {
                                 <div>
                                     <TextField
                                         required
-                                        id="outlined-required"
-                                        label={<span className='text-sm'>Card number</span>}
-                                        size="small"
-                                        className='w-full'
-                                    />
-                                </div>
-
-                                <div className='md:grid grid-cols-2 md:gap-x-2 '>
-                                    <div>
-                                        <TextField
-                                            required
-                                            id="outlined-password-input"
-                                            label="Password"
-                                            type="password"
-                                            size="small"
-                                            className='w-full'
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <TextField
-                                            required
-                                            id="outlined-required"
-                                            label={<span className='text-sm'>Card number</span>}
-                                            size="small"
-                                            className='w-full'
-                                        />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <TextField
-                                        required
-                                        id="outlined-password-input"
+                                        id="outlined-password-input email"
                                         label="email"
                                         type="email"
                                         size="small"
@@ -305,39 +291,27 @@ const page = () => {
                     <p style={{ color: "#999999" }} className='text-xs'> Home {">"} Cart {">"} Checkout </p>
                 </div>
 
-                <section className='flex pb-10 h-fit justify-between space-x-10'>
-                    <div className='flex space-x-3'>
-                        <div className='border rounded-md'>
-                            <Image style={{ width: "66px", height: "66px" }} src={product1} alt="product in cart" />
-                        </div>
 
-                        <div className='flex flex-col justify-between'>
-                            <div>
-                                <h3 className='text-sm'> Blood Test Strip </h3>
-                                <p className='text-xs font-semibold'> NGN 7 950 </p>
+                {
+                    productsInCart.map((item: any) => (
+                        <section key={item?._id} className='flex border-b pb-10 h-fit justify-between space-x-10'>
+                            <div className='flex space-x-3'>
+                                <div className='border rounded-md'>
+                                    <img style={{ width: "66px", height: "66px" }} src={urlfor(item?.image.asset._ref).url()} alt={item?.image.alt} />
+                                </div>
+
+                                <div className='flex flex-col justify-between'>
+                                    <div>
+                                        <h3 className='text-sm'> {item?.name} </h3>
+                                        <p className='text-xs font-semibold'> NGN {item?.price} </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
 
-                </section>
-
-                <section className='flex border-b pb-10 h-fit justify-between space-x-10'>
-                    <div className='flex space-x-3'>
-                        <div className='border rounded-md'>
-                            <Image style={{ width: "66px", height: "66px" }} src={product1} alt="product in cart" />
-                        </div>
-
-                        <div className='flex flex-col justify-between'>
-                            <div>
-                                <h3 className='text-sm'> Blood Test Strip </h3>
-                                <p className='text-xs font-semibold'> NGN 7 950 </p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </section>
+                        </section>
+                    ))
+                }
 
                 <div className='text-xs mt-2'>
                     <div className='flex justify-between'>
