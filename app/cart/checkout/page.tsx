@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -12,16 +12,27 @@ import { CustomButton } from '@/components';
 import product1 from '../../../public/assets/product.png';
 import Image from "next/image";
 import { useShoppingCart } from '@/utilities/CartContext';
+import { useUserContext } from '@/utilities/UserContext';
+import { redirect } from 'next/navigation';
 
 const page = () => {
-    
+
     const [selectedOption, setSelectedOption] = useState('Store pickup');
     const [selectedPaymentOption, setSelectedPaymentOption] = useState("Debit/credit card");
 
     const { totalPrice } = useShoppingCart();
+    const { currentUser } = useUserContext();
 
-    console.log(totalPrice);
-    
+    console.log(currentUser);
+
+    useLayoutEffect(() => {
+        const userExist = currentUser;
+
+        if(userExist === ""){
+            redirect("/login");
+        }
+    }, [])
+
 
     const handleChange = (event: any) => {
         setSelectedOption(event.target.value);

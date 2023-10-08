@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import logo from '../../public/assets/logo.svg';
 import search from '../../public/assets/search-icon.svg';
 import hamburger from '../../public/assets/hamburger-icon.svg';
@@ -10,10 +10,13 @@ import cancel from '../../public/assets/cancel.png';
 import call from '../../public/assets/call-icon.svg';
 import person from '../../public/assets/person-icon.svg';
 import cart from '../../public/assets/cart-icon.svg';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import NavigationItem from '../elements/NavigationItem';
 import { CustomButton, SecondaryButton } from '..';
 import { useShoppingCart } from '@/utilities/CartContext';
+import { useUserContext } from '@/utilities/UserContext';
+import { auth } from '@/firebase';
+import { signOut } from 'firebase/auth';
 //kally IT
 //www.kallysit.com
 
@@ -25,6 +28,22 @@ const Navbar = () => {
 
   const openMobileMenu = () => {
     setOpen(prev => !prev);
+  }
+
+
+  const { currentUser } = useUserContext();
+
+  console.log("People de", currentUser);
+
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      navigate.push("/login");
+      console.log("Signed out successfully")
+    }).catch((error) => {
+      // An error happened.
+    });
   }
 
   return (
@@ -46,10 +65,23 @@ const Navbar = () => {
             </div>
 
             <div className='flex justify-end'>
-              <Link href="/login" className='inline-flex justify-end items-center space-x-2'>
-                <Image src={person} alt="call icon" />
-                <p className=''>Login</p>
-              </Link>
+
+
+              {currentUser !== "" ?
+                (<button
+                  onClick={handleLogout}
+                  className='inline-flex cursor-pointer justify-end items-center space-x-2'
+                >
+                  <Image src={person} alt="call icon" />
+                  <p className=''>Logout</p>
+                </button>) :
+                (
+                  <Link href="/login" className='cursor-pointer inline-flex justify-end items-center space-x-2'>
+                    <Image src={person} alt="call icon" />
+                    <p className=''>Login</p>
+                  </Link>
+                )
+              }
             </div>
 
           </div>
@@ -125,9 +157,25 @@ const Navbar = () => {
             </ul>
 
             <div className='mt-12 space-y-6 flex flex-col '>
-              <CustomButton onClick={() => { navigate.push("/register"); setOpen(false) }} title="Create account" className='px-16 py-3 text-sm' />
+              {
+                currentUser !== "" &&
+                <SecondaryButton
+                  onClick={() => {
+                    handleLogout()
+                    setOpen(false)
+                  }}
+                  title="Logout"
+                  className='px-16 py-3 text-sm bg-white text-primary'
+                  style={{ border: "2px solid #008BFF" }}
+                />
+              }
 
-              <SecondaryButton onClick={() => { navigate.push("/login"); setOpen(false) }} title="Sign in" className='px-16 py-3 text-sm bg-white text-primary' style={{ border: "2px solid #008BFF" }} />
+              <CustomButton onClick={() => { navigate.push("/register"); setOpen(false) }} title="Create account" 
+                className={`${currentUser !== ""? 'hidden' : 'block'} px-16 py-3 text-sm`}
+               />
+
+              <SecondaryButton onClick={() => { navigate.push("/login"); setOpen(false) }} title="Sign in" 
+                className={`${currentUser !== ""? 'hidden' : 'block'} px-16 py-3 text-sm bg-white text-primary`} style={{ border: "2px solid #008BFF" }} />
             </div>
           </div>
 
