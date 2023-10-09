@@ -28,7 +28,7 @@ const Navbar = () => {
     setOpen(prev => !prev);
   }
 
-  const { currentUser } = useUserContext();  
+  const { currentUser } = useUserContext();
 
 
   const handleLogout = () => {
@@ -120,12 +120,21 @@ const Navbar = () => {
         <div className='flex items-center space-x-5'>
           <Image src={search} alt="mobile search icon" className='cursor-pointer' style={{ width: "18px" }} />
 
-          <div className='relative'>
-            <Link href="/cart">
-              <Image src={cart} alt='cart icon' className='relative z-20' style={{ width: "18px" }} />
-            </Link>
-
-            <span style={{ fontSize: "6px", background: "#E20000" }} className=' p-1 z-10 rounded-md text-white absolute -top-3 -right-2'>3</span>
+          <div className='flex space-x-3'>
+            <NavigationItem className="flex space-x-1" href="/cart">
+              <div className='relative'>
+                <Image src={cart} alt='cart icon' className='w-5 relative z-20' />
+                {
+                  cartQuantity > 0 &&
+                  <span
+                    style={{ fontSize: "9px", background: "#E20000" }}
+                    className=' p-0.5 z-10 rounded-md text-white absolute -top-3 
+                  -right-2'>
+                    {cartQuantity}
+                  </span>
+                }
+              </div>
+            </NavigationItem>
           </div>
 
           <Image onClick={openMobileMenu} className='cursor-pointer' src={open ? cancel : hamburger} alt="mobile hamburger icon" style={{ width: "18px" }} />
@@ -165,12 +174,12 @@ const Navbar = () => {
                 />
               }
 
-              <CustomButton onClick={() => { navigate.push("/register"); setOpen(false) }} title="Create account" 
-                className={`${currentUser !== ""? 'hidden' : 'block'} px-16 py-3 text-sm`}
-               />
+              <CustomButton onClick={() => { navigate.push("/register"); setOpen(false) }} title="Create account"
+                className={`${currentUser !== "" ? 'hidden' : 'block'} px-16 py-3 text-sm`}
+              />
 
-              <SecondaryButton onClick={() => { navigate.push("/login"); setOpen(false) }} title="Sign in" 
-                className={`${currentUser !== ""? 'hidden' : 'block'} px-16 py-3 text-sm bg-white text-primary`} style={{ border: "2px solid #008BFF" }} />
+              <SecondaryButton onClick={() => { navigate.push("/login"); setOpen(false) }} title="Sign in"
+                className={`${currentUser !== "" ? 'hidden' : 'block'} px-16 py-3 text-sm bg-white text-primary`} style={{ border: "2px solid #008BFF" }} />
             </div>
           </div>
 
