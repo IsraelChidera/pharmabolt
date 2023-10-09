@@ -63,7 +63,7 @@ const page = () => {
         setSelectedPaymentOption(event.target.value);
     }
 
-    const config = {
+    const config: any = {
         reference: (new Date()).getTime().toString(),
         email: email,
         amount: totalPrice * 100,
@@ -83,8 +83,8 @@ const page = () => {
         console.log('closed')
     }
 
-    const componentProps = {
-        ...config,
+    const componentProps: any = {
+        ...config,        
         text: 'Pay',
         onSuccess: (reference: any) => handlePaystackSuccessAction(reference),
         onClose: handlePaystackCloseAction,
