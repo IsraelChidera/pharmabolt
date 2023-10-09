@@ -7,7 +7,7 @@ import { urlfor } from '@/app/lib/sanity';
 
 const CartItem = ({ id, quantity }: { id: any, quantity: number }) => {
 
-    const { products, removeFromCart, increaseCartQuantity } = useShoppingCart();
+    const { products, removeFromCart, increaseCartQuantity, decreaseCartQuantity } = useShoppingCart();
 
     const item: any = products.find(item => item._id === id);
 
@@ -30,7 +30,7 @@ const CartItem = ({ id, quantity }: { id: any, quantity: number }) => {
                     <div className='text-xs w-fit border p-2 flex space-x-4 items-center mt-6 md:mt-4'>
                         <p style={{ color: "#D0D0D0" }}>Quantity</p>
                         <div className='flex items-center space-x-5'>
-                            <button className='font-bold'> - </button>
+                            <button className='font-bold' onClick={() => decreaseCartQuantity(item._id)}> - </button>
                             <p> {quantity} </p>
                             <button className='font-bold' onClick={() => increaseCartQuantity(item._id)}> + </button>
                         </div>

@@ -10,16 +10,21 @@ import TextField from '@mui/material/TextField';
 import { CustomButton } from '@/components';
 import { useShoppingCart } from '@/utilities/CartContext';
 import { useUserContext } from '@/utilities/UserContext';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { urlfor } from '@/app/lib/sanity';
+import { PaystackButton } from 'react-paystack';
+
+
 
 const page = () => {
 
+    const [email, setEmail] = useState("");
     const [selectedOption, setSelectedOption] = useState('Store pickup');
     const [selectedPaymentOption, setSelectedPaymentOption] = useState("Debit/credit card");
 
-    const { totalPrice, cartItems, products } = useShoppingCart();
+    const { totalPrice, cartItems, products, clearCart } = useShoppingCart();
     const { currentUser } = useUserContext();
+    const navigate = useRouter();
 
     const getProductsInCart = () => {
         const productsInCart: any = cartItems?.map((item) => {
@@ -32,13 +37,11 @@ const page = () => {
             }
             return null;
         });
-        
+
         return productsInCart?.filter((product: any) => product !== null);
     };
 
     const productsInCart: any = getProductsInCart();
-    console.log(productsInCart);
-
 
     useLayoutEffect(() => {
         const userExist = currentUser;
@@ -48,14 +51,45 @@ const page = () => {
         }
     }, []);
 
-
     const handleChange = (event: any) => {
         setSelectedOption(event.target.value);
+    }
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
     }
 
     const handlePaymentMethodChange = (event: any) => {
         setSelectedPaymentOption(event.target.value);
     }
+
+    const config = {
+        reference: (new Date()).getTime().toString(),
+        email: email,
+        amount: totalPrice * 100,
+        publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PK,
+    };
+
+    const handlePaystackSuccessAction = (reference: any) => {
+        // Implementation for whatever you want to do with reference and after success call.
+        console.log(reference);
+        clearCart();
+        navigate.push("/shop");
+    };
+
+    // you can call this function anything
+    const handlePaystackCloseAction = () => {
+        // implementation for  whatever you want to do when the Paystack dialog closed.
+        console.log('closed')
+    }
+
+    const componentProps = {
+        ...config,
+        text: 'Pay',
+        onSuccess: (reference: any) => handlePaystackSuccessAction(reference),
+        onClose: handlePaystackCloseAction,
+    };
+
 
     return (
         <section className='md:mt-0 grid grid-cols-1 mt-10 md:grid px-3 md:px-0 md:grid-cols-2 md:space-x-20 mx-auto md:w-5/6 md:py-8 py-10'>
@@ -241,6 +275,7 @@ const page = () => {
                                         type="email"
                                         size="small"
                                         className='w-full'
+                                        onChange={handleEmailChange}
                                     />
                                     <p className='text-xs'>
                                         Your transaction reciept will be sent to this email*
@@ -248,7 +283,7 @@ const page = () => {
                                 </div>
                             </Box>
 
-                            <CustomButton title="Proceed to summary" className='py-3 w-full mt-8' />
+                            <PaystackButton {...componentProps} className='rounded-lg bg-blue-700 text-sm text-white py-3 w-full mt-8' />
                         </div>
                     }
 
@@ -276,7 +311,7 @@ const page = () => {
                                 </p>
                             </div>
 
-                            <CustomButton title="Proceed to summary" className='py-3 w-full mt-8' />
+                            <CustomButton title="Confirm order" className='py-3 w-full mt-8' />
                         </div>
                     }
                 </div>

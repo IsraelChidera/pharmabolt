@@ -25,7 +25,8 @@ type CartContextType = {
     cartItems: CartItems[],
     products: Product[],
     setTotalPrice: any,
-    totalPrice: any
+    totalPrice: any,
+    clearCart: () => void
 }
 
 const CartContext = createContext({} as CartContextType);
@@ -102,6 +103,13 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         console.log("error message: ", errorMessage);
     }
 
+    const clearCart = () => {
+        // Clear the cart items from localStorage
+        localStorage.clear();
+        // Clear the cart items from the state
+        setCartItems([]);
+    }
+
     useEffect(() => {
         fetchAllProducts();
     }, [])
@@ -117,7 +125,8 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
                 cartQuantity,
                 products,
                 setTotalPrice,
-                totalPrice
+                totalPrice,
+                clearCart
             }}
         >
             {children}
