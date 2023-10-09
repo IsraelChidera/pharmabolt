@@ -5,12 +5,9 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { CustomButton } from '@/components';
-import product1 from '../../../public/assets/product.png';
-import Image from "next/image";
 import { useShoppingCart } from '@/utilities/CartContext';
 import { useUserContext } from '@/utilities/UserContext';
 import { redirect } from 'next/navigation';
@@ -25,7 +22,7 @@ const page = () => {
     const { currentUser } = useUserContext();
 
     const getProductsInCart = () => {
-        const productsInCart: any = cartItems.map((item) => {
+        const productsInCart: any = cartItems?.map((item) => {
             const product = products.find((p) => p._id === item.id);
             if (product) {
                 return {
@@ -35,9 +32,8 @@ const page = () => {
             }
             return null;
         });
-
-        // Remove null values (products not found in the products array)
-        return productsInCart.filter((product: any) => product !== null);
+        
+        return productsInCart?.filter((product: any) => product !== null);
     };
 
     const productsInCart: any = getProductsInCart();
@@ -293,7 +289,7 @@ const page = () => {
 
 
                 {
-                    productsInCart.map((item: any) => (
+                    productsInCart?.map((item: any) => (
                         <section key={item?._id} className='flex border-b pb-10 h-fit justify-between space-x-10'>
                             <div className='flex space-x-3'>
                                 <div className='border rounded-md'>
