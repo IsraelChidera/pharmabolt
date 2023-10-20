@@ -36,8 +36,8 @@ const Product = ({ _id, name, image, price, slug, description, popularproducts, 
                             <p className='text-xs md:text-sm font-bold p-2'> Popular </p>
                         </div>}
 
-                        <img className='md:block hidden object-contain' style={{  width: "290px", height: "275px" }} src={urlfor(image.asset._ref).url()} alt={image.alt} />
-                        <img className='block md:hidden object-contain' style={{  width: "174px", height: "197px" }} src={urlfor(image.asset._ref).url()} alt={image.alt} />
+                        <img className='md:block hidden object-contain hover:scale-75' style={{  width: "290px", height: "275px" }} src={urlfor(image.asset._ref).url()} alt={image.alt} />
+                        <img className='block md:hidden object-contain hover:scale-75' style={{  width: "174px", height: "197px" }} src={urlfor(image.asset._ref).url()} alt={image.alt} />
                     </div>
 
                     <p className='font-bold pt-2'> {truncatedLongName(name, 21)} </p>

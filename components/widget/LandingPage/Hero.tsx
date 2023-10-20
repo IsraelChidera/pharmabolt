@@ -52,7 +52,7 @@ const Hero = () => {
             </div>
 
             <div className='mx-3 md:mx-0 md:grid grid-cols-3 gap-x-6 space-y-10 md:space-y-0 mt-14 mb-6'>
-                <div className='rectangle w-fit '>
+                <div className='rectangle w-fit hover:-translate-y-1 duration-300'>
                     <h3 className='font-bold text-lg'>
                         Consult a professional
                     </h3>
@@ -66,7 +66,7 @@ const Hero = () => {
                     <CustomButton title="Book now" className='px-4 py-1 text-xs mt-4' onClick={handleClick} />
                 </div>
 
-                <div className='rectangle w-fit'>
+                <div className='rectangle w-fit hover:-translate-y-1 duration-300'>
                     <h3 className='font-bold text-lg'>
                         Upload your prescription
                     </h3>
@@ -80,7 +80,7 @@ const Hero = () => {
                     <CustomButton title="Upload now" className='px-4 py-1 text-xs mt-4' onClick={handleClick} />
                 </div>
 
-                <div className='rectangle w-fit'>
+                <div className='rectangle w-fit hover:-translate-y-1 duration-300'>
                     <h3 className='font-bold text-lg'>
                         Purchase your medication
                     </h3>

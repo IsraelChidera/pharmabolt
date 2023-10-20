@@ -5,10 +5,11 @@ const index = ({ title, disabled, className, onClick, type, ...rest }: CustomBut
     return (
         <button
             onClick={onClick}
-            style={{ background: "#008BFF" }}
+            
             type={type}
             disabled={disabled}
-            className={`rounded-lg bg-blue-700 text-sm text-white ${className}`}
+            
+            className={`rounded-lg bg-sky-500 transition-all duration-300 ease-in-out hover:bg-sky-700  text-sm text-white ${className}`}
             {...rest}
         >
             {title}
