@@ -6,6 +6,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ShoppingCartProvider } from '@/utilities/CartContext'
 import { UserProvider } from '@/utilities/UserContext'
+import FloatingButton from '@/components/elements/FloatingButton'
 
 
 
@@ -31,6 +32,7 @@ export default async function RootLayout({
         <UserProvider>
           <ShoppingCartProvider>
             <Navbar />
+            <FloatingButton />
             {children}
             <Footer />
           </ShoppingCartProvider>

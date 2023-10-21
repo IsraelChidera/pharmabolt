@@ -1,11 +1,21 @@
+'use client'
+
 import Image from 'next/image';
 import React from 'react';
 import CustomButton  from '../../elements/CustomButton';
 import book from '../../../public/assets/sign-up.png';
 import circle from '../../../public/assets/circle2.png';
 import circle2 from '../../../public/assets/circle.png';
+import { useRouter } from 'next/navigation';
 
 const CreateAccount = () => {
+
+    const router = useRouter();
+
+    const handleClick = () => {
+        router.push("/register");
+    }
+
     return (
         <section className='mt-20 border-t pt-10 md:mt-40 mx-auto md:w-5/6 relative'>
             <Image src={circle} alt="sign up image" className=' absolute left-0 bottom-0' />
@@ -30,7 +40,8 @@ const CreateAccount = () => {
 
                         <CustomButton
                             title="Create an account"
-                            className='px-12 py-3 text-xs'                        
+                            className='px-12 py-3 text-xs' 
+                            onClick={handleClick}                       
                         />
                     </div>
                 </section>
