@@ -8,8 +8,6 @@ import { ShoppingCartProvider } from '@/utilities/CartContext'
 import { UserProvider } from '@/utilities/UserContext'
 import FloatingButton from '@/components/elements/FloatingButton'
 
-
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -22,12 +20,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
-
-
   return (
     <html lang="en">
-
       <body className={inter.className}>
         <UserProvider>
           <ShoppingCartProvider>
@@ -38,7 +32,6 @@ export default async function RootLayout({
           </ShoppingCartProvider>
         </UserProvider>
       </body>
-
     </html>
   )
 }
