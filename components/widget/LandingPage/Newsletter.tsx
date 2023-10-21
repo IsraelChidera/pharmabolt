@@ -29,7 +29,7 @@ const Newsletter = () => {
                     />
                     <CustomButton
                         title="Subscribe"
-                        className='bg-white z-20 rounded py-2 px-4 text-xs absolute top-2 right-3'
+                        className='z-20 rounded py-2 px-4 text-xs absolute top-2 right-3'
                         onClick={handleClick}
                     />
                 </div>
