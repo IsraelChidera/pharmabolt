@@ -60,6 +60,7 @@ const page = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setErrorMsg(errorMessage);
+                setLoading(false);
             });
     }
 

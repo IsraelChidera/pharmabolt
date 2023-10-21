@@ -69,9 +69,11 @@ const Navbar = () => {
                 >
                   <Image src={person} alt="call icon" />
                   <p className=''>Logout</p>
-                </button>) :
+                </button>
+                ) 
+                :
                 (
-                  <Link href="/login" className='cursor-pointer inline-flex justify-end items-center space-x-2'>
+                  <Link href="/login" className='hover:text-sky-700 cursor-pointer inline-flex justify-end items-center space-x-2'>
                     <Image src={person} alt="call icon" />
                     <p className=''>Login</p>
                   </Link>

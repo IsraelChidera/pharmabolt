@@ -63,15 +63,16 @@ const page = () => {
         await createUserWithEmailAndPassword(auth, values.email, values.password)
             .then((userCredential) => {
                 const user = userCredential.user;
-
                 console.log("Success")
                 setLoading(false);
                 setSuccess(true);
+                navigate.push("/cart");
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setErrorMsg(errorMessage);
+                setLoading(false);
             })
 
         const currentUsers: any = auth.currentUser;
@@ -88,8 +89,6 @@ const page = () => {
             })
         }
     }
-
-
 
     const handleLoginWithGoogle = async () => {
         signInWithPopup(auth, provider)
@@ -226,7 +225,7 @@ const page = () => {
 
                                     <CustomButton
                                         type="submit"
-                                        title="Create account"
+                                        title={loading ? "Creating Account" : "Create Account"}
                                         className='disabled:opacity-65 mt-10 py-3 w-full'
                                     />
 
